@@ -54,3 +54,7 @@ local.properties
 .cache-main
 .scala_dependencies
 .worksheet
+
+*.js linguist-language=java
+*.css linguist-language=java
+*.html linguist-language=java
