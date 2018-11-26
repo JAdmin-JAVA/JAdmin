@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../css/global-v1.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/layer/default/layer.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/code.css" media="all">
+		<script src="../layui/layui.all.js" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="site-content">
+			<h1 class="site-h1">系统日志</h1>
+				
+			<div class="site-text">
+				
+				<p>当对某个url声明@MethodLog注解时，在访问该url时，系统会将记录日志保存到数据库。</p>
+				<pre class="layui-code">@RequestMapping({ "/toModifyPwd" })
+					@MethodLog(type = "修改密码")
+					public @ResponseBody String toModifyPwd(HttpServletRequest request) {
+					    // 修改密码的具体操作，此处略
+					}</pre>
+				<p>当用户进行密码修改操作时，会访问/toModifyPwd，系统就会记录该操作日志：</p>
+				<img src="../images/back-other-1.png" />
+				<p>@MethodLog注解参数详细介绍：</p>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>参数名称</th>
+							<th>参数类型</th>
+							<th>默认值</th>
+							<th>参数说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>type</td>
+							<td>String</td>
+							<td>空</td>
+							<td>日志的类别，如果为空，将会寻找@AdminPageButton的name作为类别</td>
+						</tr>
+						<tr>
+							<td>content</td>
+							<td>String[]</td>
+							<td>空</td>
+							<td>日志内容属性，日志内容默认只记录控制器方法返回的值，如果想记录其他内容，比如删除操作时，删除的数量：
+								<pre class="layui-code">@RequestMapping({"/del"})
+								@MethodLog(content = {"数量"})
+								public @ResponseBody String del(String id, HttpServletRequest request) {
+								    // 具体的删除操作，此处略
+								    request.setAttribute("数量", count);
+								}</pre>
+							    该日志记录下来的内容格式为：“删除：返回结果：success，数量：2个”
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+			</div>
+		</div>
+		
+		<script>
+			layui.use('code', function(){ //加载code模块
+			  layui.code({
+				  encode: true //是否转义html标签。默认不开启
+			  });
+			});
+			
+		</script>
+	</body>
+</html>

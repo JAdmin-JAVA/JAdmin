@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../css/global-v1.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/layer/default/layer.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/code.css" media="all">
+		<script src="../layui/layui.all.js" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="site-content">
+			<h1 class="site-h1">数据缓存</h1>
+				
+			<blockquote class="site-tips site-text">
+				数据缓存指的是，系统启动时，将数据库里面的数据 缓存到内存中，使用的时候不再需要查询数据库，调用缓存即可。
+			</blockquote>
+			
+			<div class="site-text">
+				<pre class="layui-code">@Getter @Setter
+					public class CacheVO extends AbstractSimple{
+						
+					    @StartCache(" from ConfigVO where billStatus = 1 ")
+					    private List<ConfigVO> configs;
+				}</pre>
+				<p>通过在com.jadmin.vo.entity.CacheVO类中添加变量，并声明@StartCache注解，可以实现系统配置表的数据缓存。</p>
+				<pre class="layui-code">// 获取缓存的方法
+					Commons.getInstance().getCacheVO().getConfigs();
+					// 刷新缓存的方法
+					StartCacheUtil.refurbish("configs");</pre>
+				<p>通过Commons.getInstance().getCacheVO().get{变量名}方法获取缓存；通过Commons.refurbishCache("{变量名}")方法刷新缓存。</p>
+				<p>@DJob用来设置调度cron时间、延迟时间等，注解参数详细介绍：</p>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>参数名称</th>
+							<th>参数类型</th>
+							<th>默认值</th>
+							<th>参数说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>value</td>
+							<td>String</td>
+							<td>空</td>
+							<td>sql或者hql</td>
+						</tr>
+						<tr>
+							<td>type</td>
+							<td>String</td>
+							<td>空</td>
+							<td>默认智能识别，可人工填写，sql或hql</td>
+						</tr>
+						<tr>
+							<td>methodInit</td>
+							<td>boolean</td>
+							<td>false</td>
+							<td>是否通过方法初始化值</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<p>系统内置了刷新数据缓存的接口：/flushStaticData?keys={数据缓存的变量}</p>
+			<p></p>
+
+		</div>
+		
+		<script>
+			layui.use('code', function(){ //加载code模块
+			  layui.code(); //引用code方法
+			});
+		</script>
+	</body>
+</html>

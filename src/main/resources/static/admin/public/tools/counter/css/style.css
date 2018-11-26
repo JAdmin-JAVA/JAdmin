@@ -1,0 +1,352 @@
+/* --------------------------------- Layout ---------------------------------*/
+
+.container {
+    width: 320px;
+    padding: 12px;
+}
+
+/* vertically center .container */
+body {
+  min-height: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+button {
+    width: 65px;
+    height: 45px;
+    font-family: 'Roboto', sans-serif;
+    border: none;
+    border-radius: 5px;
+    outline: none !important;
+    position:relative;
+    transition: all 0.1s;
+}
+
+button.operator-group, button#equal {
+    font-size: 30px !important;
+}
+
+button.operand-group, button#clear, button#ans {
+    font-size: 20px !important;
+}
+
+#display1 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400 !important;
+    font-size: 20px !important;
+    height: 50px;
+}
+
+.button-row {
+    margin-top: 12px;
+}
+
+form {
+    width: 294px;
+    border-radius: .25rem;
+}
+
+form input {
+    background-color: inherit;
+    border: none;
+    width: 294px;
+    margin: 0 auto;
+    display: block;
+}
+
+/*--------------------------- Light & Dark System ---------------------------*/
+
+/* Light Theme */
+.container-light {
+    background-color: #cfd8dc;
+    border: 1px solid #cfd8dc;
+}
+
+.form-light {
+    background-color: #eceff1;
+    box-shadow: 0 0 0 0.1rem rgba(176, 190, 197, .5);
+}
+
+.form-input-light {
+    color: #263238;
+}
+
+.operand-group-light {
+    background-color: #90a4ae;
+    border-color: #90a4ae; 
+    color: black;
+    box-shadow: 0px 5px 0px #6b8694; /* 12% darker than bg */
+}
+
+.operand-group-light:hover {
+    background-color: #78909c;
+    border-color: #607d8b;
+    box-shadow: 0px 5px 0px #576b75; /* 14% darker than bg */
+}
+
+.operand-group-light:active {
+    background-color: #607d8b;
+    background-color: #607d8b;
+    box-shadow: 0px 2px 0px #495f69; /* 11% darker than bg */
+    top: 3px;
+}
+
+.operator-group-light {
+    background-color: #546e7a;
+    border-color: #546e7a;
+    color: #ffffff;
+    box-shadow: 0px 5px 0px #3f525a; /* 10% darker than bg */
+}
+
+.operator-group-light:hover {
+    background-color: #455a64;
+    border-color: #37474f;
+    box-shadow: 0px 5px 0px #2a363c; /* 13% darker than bg */
+}
+
+.operator-group-light:active {
+    background-color: #37474f;
+    border-color: #37474f;
+    box-shadow: 0px 2px 0px #1f292d; /* 11% darker than bg */
+    top: 3px;
+}
+
+.clear-light {
+    background-color: #f44336;
+    border-color: #f44336;
+    color: #ffffff;
+    box-shadow: 0px 5px 0px #c2160a;
+    color: #ffffff;
+}
+
+.clear-light:hover {
+    background-color: #e53935;
+    border-color: #d32f2f;
+    box-shadow: 0px 5px 0px #b51a17;
+}
+
+.clear-light:active {
+    background-color: #d32f2f;
+    border-color: #d32f2f;
+    box-shadow: 0px 2px 0px #a82424;
+    top: 3px;
+}
+
+.ans-light, .backspace-light {
+    background-color: #ff9800;
+    border-color: #ff9800;
+    color: #ffffff;
+    box-shadow: 0px 5px 0px #cc7a00;
+    color: #ffffff;
+}
+
+.ans-light:hover, .backspace-light:hover {
+    background-color: #fb8c00;
+    border-color: #f57c00;
+    box-shadow: 0px 5px 0px #b36200;
+}
+
+.ans-light:active, .backspace-light:active {
+    background-color: #f57c00;
+    border-color: #f57c00;
+    box-shadow: 0px 2px 0px #b35900;
+    top: 3px;
+}
+
+.equal-light {
+    background-color: #4caf50;
+    border-color: #4caf50;
+    color: #ffffff;
+    box-shadow: 0px 5px 0px #3e8e41;
+    color: #ffffff;
+}
+
+.equal-light:hover {
+    background-color: #43a047;
+    border-color: #388e3c;
+    box-shadow: 0px 5px 0px #357e38;
+}
+
+.equal-light:active {
+    background-color: #388e3c;
+    border-color: #388e3c;
+    box-shadow: 0px 2px 0px #245b27;
+    top: 3px;
+}
+
+/* Dark Theme */
+.container-dark {
+    background-color: #37474f;
+    border: 1px solid #37474f;
+}
+
+.form-dark {
+    background-color: #263238;
+    box-shadow: 0 0 0 0.1rem rgba(69, 90, 100, .5);
+}
+
+.form-input-dark {
+    color: #eceff1;
+}
+
+.operand-group-dark {
+    background-color: #607d8b;
+    border-color: #607d8b;
+    color: #ffffff;
+    box-shadow: 0px 5px 0px #495f69;
+}
+
+.operand-group-dark:hover {
+    background-color: #546e7a;
+    border-color: #455a64;
+    box-shadow: 0px 5px 0px #3f525a;
+}
+
+.operand-group-dark:active {
+    background-color: #455a64;
+    border-color: #455a64;
+    box-shadow: 0px 2px 0px #2a363c;
+    top: 3px;
+}
+
+.operator-group-dark {
+    background-color: #b0bec5;
+    border-color: #b0bec5;
+    color: #000000;
+    box-shadow: 0px 5px 0px #8a9ea8;
+}
+
+.operator-group-dark:hover {
+    background-color: #90a4ae;
+    border-color: #78909c;
+    box-shadow: 0px 5px 0px #6b8694;
+}
+
+.operator-group-dark:active {
+    background-color: #78909c;
+    border-color: #78909c;
+    box-shadow: 0px 2px 0px #576b75;
+    top: 3px;
+}
+
+.clear-dark {
+    background-color: #f44336;
+    border-color: #f44336;
+    color: #ffffff;
+    box-shadow: 0px 5px 0px #c2160a;
+    color: #000000;
+}
+
+.clear-dark:hover {
+    background-color: #e53935;
+    border-color: #d32f2f;
+    box-shadow: 0px 5px 0px #b51a17;
+}
+
+.clear-dark:active {
+    background-color: #d32f2f;
+    border-color: #d32f2f;
+    box-shadow: 0px 2px 0px #931f1f;
+    top: 3px;
+}
+
+.ans-dark, .backspace-dark {
+    background-color: #ff9800;
+    border-color: #ff9800;
+    color: #ffffff;
+    box-shadow: 0px 5px 0px #cc7a00;
+    color: #000000;
+}
+
+.ans-dark:hover, .backspace-dark:hover {
+    background-color: #fb8c00;
+    border-color: #f57c00;
+    box-shadow: 0px 5px 0px #b36200;
+}
+
+.ans-dark:active, .backspace-dark:active {
+    background-color: #f57c00;
+    border-color: #f57c00;
+    box-shadow: 0px 2px 0px #b35900;
+    top: 3px;
+}
+
+.equal-dark {
+    background-color: #4caf50;
+    border-color: #4caf50;
+    color: #ffffff;
+    box-shadow: 0px 5px 0px #367c39;
+    color: #000000;
+}
+
+.equal-dark:hover {
+    background-color: #43a047;
+    border-color: #388e3c;
+    box-shadow: 0px 5px 0px #2d6c30;
+}
+
+.equal-dark:active {
+    background-color: #388e3c;
+    border-color: #388e3c;
+    box-shadow: 0px 2px 0px #245b27;
+    top: 3px;
+}
+
+/*----------------------------- Rounded switch ------------------------------*/
+
+.switch input {
+    display: none;
+}
+
+.switch {
+    position: relative;
+    width: 30px;
+    height: 17px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+    transition: .4s;
+    border-radius: 50px;
+    background-color: #263238;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 13px;
+    width: 13px;
+    left: 2px;
+    bottom: 2px;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider:before {
+    background-color: #263238;
+}
+
+input:not(:checked) + .slider:before {
+    background-color: #eceff1;
+}
+
+input:checked + .slider {
+  background-color: #eceff1;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #eceff1;
+}
+
+input:checked + .slider:before {
+  transform: translateX(13px);
+}

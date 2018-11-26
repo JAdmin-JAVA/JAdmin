@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../css/global-v1.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/layer/default/layer.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/code.css" media="all">
+		<script src="../layui/layui.all.js" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="site-content">
+			<h1 class="site-h1">富文本编辑器</h1>
+			
+			<blockquote class="site-tips site-text">
+				富文本编辑器默认使用的是kindeditor（<a target="_blank" href="http://kindeditor.net/demo.php">点击查看官网API</a>），
+				KindEditor 是一套开源的在线HTML编辑器，主要用于让用户在网站上获得所见即所得编辑效果，
+				开发人员可以用 KindEditor 把传统的多行文本输入框(textarea)替换为可视化的富文本输入框，主要特点有：</br>
+				 · 快速：体积小，加载速度快</br>
+				 · 开源：开放源代码，高水平，高品质</br>
+				 · 底层：内置自定义 DOM 类库，精确操作 DOM</br>
+				 · 扩展：基于插件的设计，所有功能都是插件，可根据需求增减功能</br>
+				 · 风格：修改编辑器风格非常容易，只需修改一个 CSS 文件</br>
+				 · 兼容：支持大部分主流浏览器，比如 IE、Firefox、Safari、Chrome、Opera
+			</blockquote>
+			
+			<div class="site-text">
+				<pre class="layui-code"><script charset="utf-8" src="/lib/kindeditor/kindeditor.js"></script></pre>
+				<p>在需要显示编辑器的位置添加textarea输入框：</p>
+				<pre class="layui-code"><textarea id="editor_id" style="width:700px;height:300px;"></textarea></pre>
+				<p>然后添加以下javascript脚本：</p>
+				<pre class="layui-code"><script charset="utf-8">
+					    KE.show({
+					        id : "editor_id",
+					        imageUploadJson : '/kindeditorUpLoadPic',  
+					        allowFileManager : true,
+					        afterBlur: function(id){//同步数据到textarea
+					            KE.sync(id);
+					        }
+					    });
+					</script></pre>
+				<p>富文本编辑器默认风格，如下图所示：</p>
+				<img src="../images/ft-6.png" />
+				<p>更多更详细的API 建议大家去官网阅读，这里就不再搬运了，
+					<a target="_blank" href="http://kindeditor.net/doc.php">http://kindeditor.net/doc.php</a></p>
+			</div>
+
+		</div>
+		
+		<script>
+			layui.use('code', function(){ //加载code模块
+			  layui.code({
+				  encode: true //是否转义html标签。默认不开启
+			  });
+			});
+		</script>
+	</body>
+</html>

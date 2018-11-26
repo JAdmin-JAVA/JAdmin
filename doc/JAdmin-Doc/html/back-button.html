@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../css/global-v1.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/layer/default/layer.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/code.css" media="all">
+		<script src="../layui/layui.all.js" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="site-content">
+			<h1 class="site-h1">操作按钮</h1>
+			
+			<div class="site-text">
+				<p>这里说的操作按钮，指的是列表页面的操作按钮，该类型的操作按钮可以通过角色权限控制，按钮显示位置如下图所示：</p>
+				<img src="../images/button_1.png" />
+				<p>例如添加按钮，需要在列表页面的Controller类添加控制器方法，并声明@AdminPageButton注解：</p>
+				<pre class="layui-code">@AdminPageButton(name = "添加", imgChar = "#xe600;", showType = AdminPageButton.LAYER, dataType = AdminPageButton.NO)
+				@RequestMapping({"/toAdd"})
+				public String toAdd(HttpServletRequest request) {
+				    return getBaseEditJspUrl() + "/data-edit";
+				}</pre>
+				<p>name表示按钮名字，imgChar表示按钮图标，showType定义按钮的处理方式（LAYER表示通过layer弹出/{baseUrl}/toAdd页面），
+					dataType定义按钮触发策略（NO表示不需要选中任何数据）</p>
+				<p>按钮可以设定触发的策略，@AdminPageButton定义了3种dataType策略：</br>
+					1、不选择任何数据 即可触发 （默认），比如添加</br>
+					2、必须选择一个数据 才能触发 ，比如编辑</br>
+					3、必须选择一个或多个数据 才能触发 ，比如删除
+				</p>
+				<p>按钮点击后，@AdminPageButton定义了3种showType处理方式：</br>
+					1、将当前页面跳转到 指定url</br>
+					2、将当前页面通过 layer弹出来 （默认）</br>
+					3、ajax异步请求服务器，然后弹出处理结果，比如删除按钮
+				</p>
+				<p>列表页面的父类CommonListController《T extends AbstractValueObject》默认包含3个按钮：添加、编辑、删除，可以通过@AdminPageNoButton注解定义不需要显示的按钮。</p>
+				
+				<p>@AdminPageButton注解参数详细介绍：</p>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>参数名称</th>
+							<th>参数类型</th>
+							<th>默认值</th>
+							<th>参数说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>name</td>
+							<td>String</td>
+							<td>无默认</td>
+							<td>按钮的名字</td>
+						</tr>
+						<tr>
+							<td>imgChar</td>
+							<td>String</td>
+							<td>空</td>
+							<td>按钮图标</td>
+						</tr>
+						<tr>
+							<td>color</td>
+							<td>String</td>
+							<td>空</td>
+							<td>颜色，目前有五种:</br>
+								primary 提供额外的视觉感, 可在一系列的按钮中指出主要操作</br>
+								secondary 默认样式的替代样式</br>
+								success 表示成功或积极的动作</br>
+								warning 提醒应该谨慎采取这个动作</br>
+								danger 表示这个动作危险或存在危险</br>
+								<img style="max-width: 460px;" src="../images/button_2.png"/>
+							</td>
+						</tr>
+						<tr>
+							<td>showType</td>
+							<td>int</td>
+							<td>LAYER</td>
+							<td>按钮点击后的处理方式：</br>
+							AdminPageButton.JUMP：将当前页面跳转到 指定url</br>
+							AdminPageButton.LAYER：将当前页面通过 layer弹出来 （默认）</br>
+							AdminPageButton.AJAX：ajax异步请求服务器，然后弹出处理结果
+							</td>
+						</tr>
+						<tr>
+							<td>dataType</td>
+							<td>int</td>
+							<td>NO</td>
+							<td>按钮的触发策略：</br>
+							AdminPageButton.NO：不选择任何数据 即可触发 （默认）</br>
+							AdminPageButton.RADIO：必须选择一个数据 才能触发 </br>
+							AdminPageButton.CHECKBOX：必须选择一个或多个数据 才能触发 
+							</td>
+						</tr>
+						<tr>
+							<td>layerHeight</td>
+							<td>int</td>
+							<td>-1</td>
+							<td>弹出框的高度，只有showType为LAYER时生效，默认是(100%-100px)，上下各空50px</td>
+						</tr>
+					</tbody>
+						<tr>
+							<td>ajaxConfirm</td>
+							<td>boolean</td>
+							<td>true</td>
+							<td>是否弹出操作确认提示框，只有showType为AJAX时生效</td>
+						</tr>
+				</table>
+				
+				<p>可以通过application.yml的jadmin.adminButton参数，设置按钮的显示顺序：</p>
+				<pre class="layui-code">#该属性为后台页面按钮的显示顺序，写在前面，就显示在前面
+				adminButton: #List
+				 - 添加
+				 - 详情
+				 - 编辑
+				 - 删除</pre>
+			</div>
+
+		</div>
+		
+		<script>
+			layui.use('code', function(){ //加载code模块
+			  layui.code(); //引用code方法
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../css/global-v1.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/layer/default/layer.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/code.css" media="all">
+		<script src="../layui/layui.all.js" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="site-content">
+			<h1 class="site-h1">后台模板</h1>
+			
+			<blockquote class="site-tips site-text">
+				JAdmin默认使用的是H-ui.admin后台模板（
+				<a target="_blank" href="http://www.h-ui.net/H-ui.admin.shtml">点击查看官网API</a>），并在此基础上略做修改。
+				H-ui.admin是用H-ui前端框架开发的轻量级网站后台模版，采用源生html语言，完全免费，简单灵活，兼容性好。
+			</blockquote>
+			
+			<div class="site-text">
+				<p>JAdmin前端的资源文件全部放在src/main/resources/static目录下，该目录的结构如下所示：</p>
+					<pre class="layui-code">├─admin //用来定义后台网页的资源文件
+					│  ├─temp //项目特殊的资源文件库，与jadmin资源库独立出来
+					│  └─public //jadmin框架公共资源库
+					│     ├─css
+					│     │   ├─H-ui.admin.css //H-ui.admin样式
+					│     │   ├─H-ui.css //H-ui样式
+					│     │   ├─H-ui.login.css //登陆样式
+					│     │   ├─H-ui.min.css //H-ui样式(min版)
+					│     │   ├─H-ui.reset.css //CSS Reset
+					│     │   └─jadmin.css //jadmin的样式
+					│     ├─images //图片
+					│     ├─js
+					│     │   ├─cookie.js //cookie工具类
+					│     │   ├─data-list.js //通用列表页面的js
+					│     │   ├─data-tree-drag.js //tree拖拽插件
+					│     │   ├─H-ui.admin.js //H-ui.admin.js
+					│     │   ├─H-ui.js //H-ui.js
+					│     │   ├─jadmin.js //jadmin的js
+					│     │   └─qq-map.js //qq地图的js
+					│     ├─skin  //模板皮肤
+					│     ├─tools //首页实用小工具页面
+					│     └─images
+					├─lib //第三方插件
+					│   ├─datatables //jQuery表格插件
+					│   ├─Highcharts //纯JavaScript编写的一个图表库
+					│   ├─icheck //radio美化插件
+					│   ├─inc //jQuery validation表单验证
+					│   ├─jquery
+					│   ├─kindeditor //富文本编辑器
+					│   ├─layer //layer弹出框
+					│   ├─laypage //分页插件
+					│   ├─lightbox2 //jQuery图片弹出放大插件
+					│   ├─mui // 手机端模板
+					│   ├─My97DatePicker // 日期插件
+					│   ├─nprogress // web进度条插件
+					│   ├─PIE-2.0beta1 //ie8以下兼容插件
+					│   ├─Select-or-Die-master //select下拉框美化插件
+					│   ├─Validform //表单验证
+					│   ├─Webuploader // 图片上传插件
+					│   ├─zTree //树插件
+					│   ├─expresslnstall.swf
+					│   ├─html5.js // IE8以下兼容插件
+					│   ├─ie-css3.htc // 让IE8以下支持css3的插件
+					│   ├─respond.min.js // IE8以下兼容插件
+					│   └─swfobject.js
+					└─web //用来定义前台网页（非后台网页）的资源文件</pre>
+					
+					<fieldset class="layui-elem-field layui-field-title site-title">
+						<legend>
+							<a name="classical">html5.js</a>
+						</legend>
+					</fieldset>
+					
+					<p>让IE低版本浏览器兼容html5元素。H-ui全部采用HTML5的元素，所以为了更好的兼容IE低版本浏览器，请在<head>区优先引用html5.js。</p>
+					<pre class="layui-code"><!--[if lt IE 9]>
+						<script type="text/javascript" src="lib/html5.js"></script>
+						<script type="text/javascript" src="lib/respond.min.js"></script>
+						<script type="text/javascript" src="lib/PIE_IE678.js"></script>
+						<![endif]--></pre>
+							
+					<fieldset class="layui-elem-field layui-field-title site-title">
+						<legend>
+							<a name="classical">H-ui.reset.css</a>
+						</legend>
+					</fieldset>
+					<p>就是我们常用的CSS Reset，许多大网站的CSS文件中也含有CSS Reset内容。</p>
+					<p>作用：把浏览器提供的默认样式覆盖掉。因为浏览器的默认样式往往会给我们带来麻烦，影响开发效率。
+						所以解决的方法就是一开始就将浏览 器的默认样式全部去掉，更准确说就是通过重新定义标签样式。</p>
+					<p>注意： 如果你直接调用了H-ui.css文件就不要调用H-ui.reset.css文件，避免代码重复。</p>
+							
+					<fieldset class="layui-elem-field layui-field-title site-title">
+						<legend>
+							<a name="classical">H-ui API</a>
+						</legend>
+					</fieldset>
+					<p>H-ui API 建议大家去官网阅读，这里就不再搬运了，
+						<a target="_blank" href="http://www.h-ui.net/Hui-overview.shtml">http://www.h-ui.net</a></p>
+			</div>
+					
+		</div>
+		
+		<script>
+			layui.use('code', function(){ //加载code模块
+			  layui.code({
+				  encode: true //是否转义html标签。默认不开启
+			  });
+			});
+		</script>
+	</body>
+</html>

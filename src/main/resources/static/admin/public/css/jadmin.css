@@ -1,0 +1,378 @@
+@charset "utf-8";
+/** hui.admin 优化 */
+.dropDown-desc{
+	padding: 8px 8px 0px 8px;
+}
+.dropDown-desc li{
+	white-space: nowrap;
+	padding-bottom: 5px;
+}
+.imgA{
+	cursor: pointer;
+}
+.hImg{
+	position: absolute;
+	display: none;
+	left: 10px;
+	padding: 4px;
+	border: 1px solid #ddd;
+}
+.carrousel {
+    position: fixed;
+    background-color: rgba(10, 10, 10, 0.8);
+    display: none;
+}
+.center-block, .carrousel, .carrousel .wrapper {
+    margin: auto;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+.entypo-cancel {
+    cursor: pointer;
+    color: #FFF;
+    position: fixed;
+    top: 4px;
+    right: 8px;
+    font-size: 18px;
+    z-index: 1000;
+}
+.carrousel .wrapper {
+    text-align: center;
+    overflow: hidden;
+}
+.center-block, .carrousel, .carrousel .wrapper {
+    margin: auto;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.carrousel .wrapper > img {
+    height: calc(100% - 40px);
+    margin-top: 20px;
+}
+
+.select_min .sod_select {
+    max-width: 100px;
+    min-width: 100px;
+}
+
+.select-box, .input-text, .textarea, #msunSelectTree-wrap, .sod_select{
+	border-radius: 3px;
+}
+
+#searchFrom .input-text{
+	width: 100px;
+}
+
+#searchFrom select{
+	max-width: 120px;
+    min-width: 60px;
+}
+
+#searchFrom .select-box{
+	min-width: 60px;
+}
+
+#search_change{
+	position: relative;
+	top: 2px;
+}
+
+.Hui-aside .menu-only {
+	display: inline-block;
+	width: 100%;
+}
+
+.Hui-aside .menu-only:hover {
+	color: #148cf1;
+	text-decoration: none;
+}
+
+.msun-page-right-wrap {
+	width: calc(100% - 210px);
+	float: right;
+}
+
+.msun-ztree {
+	width: 190px;
+	float: left;
+	padding: 0px;
+	overflow-x: auto;
+	background-color: #fcfdfd;
+	min-height: calc(100% - 50px);
+	top: 40px;
+	left: 0;
+	position: absolute;
+}
+
+.big-page .msun-ztree{
+	padding: 0px;
+}
+
+.ztree li ul.line {
+	border-top: 0px;
+}
+
+#msunSelectTree-wrap{
+	display:none; 
+	position: absolute;
+	margin-top: -35px;
+    border: solid 1px #3bb4f2;
+    background: white;
+    min-width: 220px;
+}
+
+#msunSelectTree{
+    max-height: 360px;
+    min-height: 200px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+#msun-tree-iframe {
+	width: 100%;
+	border: none;
+	min-height: 200px;
+}
+
+.treeSelect{
+	cursor: pointer;
+	min-height: 31px;
+    padding-top: 0px !important;
+    position: relative;
+    min-width: 122px !important;
+    padding-right: 40px;
+}
+
+#msunSelectTree-wrap .msun-tree-search{
+	margin: 30px 5px 5px 5px;
+    width: calc(100% - 10px);
+    border: 1px solid #e4eaec;
+    border-radius: 3px;
+}
+
+.treeSelect span{
+	display: table;
+	min-width: 75px;
+    position: relative;
+    left: 4px;
+    top: 3px;
+}
+
+.treeSelect .Hui-iconfont{
+	font-size: 18px;
+    position: absolute;
+    right: 5px;
+    top: 0px;
+}
+
+.now-tree-select{
+	z-index: 1;
+}
+
+.now-tree-select .treeSelect{
+    border: none;
+}
+
+.now-tree-select .treeSelect span{
+    min-width:193px !important;
+}
+
+.treeSelect-input{
+	border: none;
+	width: 0px;
+    display: none;	
+}
+
+.treeSelect .Validform_error{
+    height: 21px;
+    top: 4px;
+}
+
+.form-horizontal .Validform_checktip{
+	margin-top: 5px !important;
+}
+
+.dislpayArrow a {
+    background: url(../skin/default/icon_arrow.png) no-repeat 0 0;
+}
+
+.treeArrow{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 200px;
+    width: 6px;
+    min-height: calc(100% - 40px);
+    z-index: 100;
+    margin-top: 40px;
+    background-color: #f5f5f5;
+    cursor: col-resize;
+}
+
+.treeArrow span {
+    color: white;
+    font-size: 13px;
+    position: fixed;
+    display: block;
+    width: 6px;
+    height: 61px;
+    top: 50%;
+    margin-top: -30px;
+    outline: none;
+    z-index: 100;
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+.treeArrow span i{
+	position: relative;
+    left: -3px;
+    top: 18px;
+}
+
+.treeArrow span i:before {
+    content: "\e6d4";
+}
+
+.big-page .treeArrow span i:before {
+    content: "\e6d7";
+}
+/** hui.admin 优化*/
+
+/** select美化 */
+.filter-disabled {
+	-moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.filter-box {
+    position: relative;
+}
+
+.filter-box select {
+	display: none;
+}
+
+.filter-text {
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+	cursor: pointer;
+	padding: 0 30px 0 10px;
+	background: #fff;
+	border: 1px solid #e6e6e6;
+}
+
+.filter-text input {
+	font-size: 14px;
+}
+
+.filter-text .filter-title {
+	width: 100%;
+	height: 36px;
+	line-height: 36px;
+	border: 0;
+	background-color: transparent;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 0;
+	cursor: pointer;
+}
+
+.filter-list {
+	display: none;
+	width: 100%;
+	max-height: 300px;
+	background-color: #fff;
+	font-size: 14px;
+	position: absolute;
+	top: 42px;
+	left: 0;
+	z-index: 99;
+	border: 1px solid #e6e6e6;
+	overflow: auto;
+}
+
+.filter-list li.filter-null a {
+	color: #d2d2d2;
+}
+
+.filter-list li a {
+	display: block;
+	padding: 0 10px;
+	line-height: 36px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	cursor: pointer;
+}
+
+.filter-list li:hover {
+	background-color: #f2f2f2;
+}
+
+.filter-list li.filter-selected {
+	background-color: #5FB878;
+}
+
+.filter-list li.filter-selected a{
+	display: block;
+	color: #fff;
+}
+
+.filter-list li.filter-disabled {
+	background-color: #fff;
+}
+
+.filter-list li.filter-disabled a{
+	display: block;
+	color: #d2d2d2;
+}
+
+.filter-list li.filter-disabled:hover a {
+	cursor: not-allowed!important;
+	background-color: #fff;
+}
+
+.icon {
+	position: absolute;
+}
+
+.icon-filter-arrow {
+	width: 8px;
+	height: 6px;
+	background-repeat: no-repeat;
+    background-image: url(../images/icon_arrow_down_x2.png);
+    background-size: 100%;
+    right: 10px;
+    top: 13px;
+    transition: all .2s;
+}
+
+.icon-filter-arrow.filter-show {
+	-webkit-transform: rotate(-180deg);
+	transform: rotate(-180deg);
+}
+
+.filter-list::-webkit-scrollbar {
+	width: 4px;
+	height: 4px;
+}
+
+.filter-list::-webkit-scrollbar-track {
+	background: #fff 
+}
+
+.filter-list::-webkit-scrollbar-thumb {
+	background: #CBCBCB;
+}
+/** select美化 */

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML5 canvas网页二维码生成器</title>
+  <style>
+html { height: 100%; font-family: sans-serif; }
+body { display: -webkit-flex; display: flex; -webkit-flex-direction: column; flex-direction: column; height: calc(100% - 100px); background-color: #EFEFEF; }
+*, :after, :before { box-sizing: border-box; }
+main { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center; height: 100%; }
+main section { min-width: 250px; max-width: 50%; height: 100%; text-align: center; }
+main img { border: 2px solid #fff; }
+main form { padding: 25px 0 50px 0; text-align: left; }
+main form label { display: block; margin-top: 10px; font-weight: bold; }
+main form input,  main form select { width: 100%; }
+ main form input:invalid {
+ outline: 2px solid #f00;
+ color: #f00;
+}
+  </style>
+  </head>
+  <body>
+<main>
+    <section> <img id="qrious">
+    <form autocomplete="off">
+        <label> 网址
+        <input type="text" name="value" value="http://www.baidu.com/" spellcheck="false">
+      </label>
+        <label> 大小
+        <input type="number" name="size" placeholder="100" min="100" max="1000" value="250">
+      </label>
+        <label> 水平
+        <select name="level">
+            <option value="L">L - 7% damage</option>
+            <option value="M">M - 15% damage</option>
+            <option value="Q">Q - 25% damage</option>
+            <option value="H">H - 30% damage</option>
+          </select>
+      </label>
+        <label> 背景
+        <input type="color" name="background" value="#ffffff">
+      </label>
+        <label> 前景
+        <input type="color" name="foreground" value="#000000">
+      </label>
+      </form>
+  </section>
+  </main>
+<script src="dist/umd/qrious.js"></script> 
+<script>
+	  (function() {
+	    var $background = document.querySelector('main form [name="background"]')
+	    var $foreground = document.querySelector('main form [name="foreground"]')
+	    var $level = document.querySelector('main form [name="level"]')
+	    var $section = document.querySelector('main section')
+	    var $size = document.querySelector('main form [name="size"]')
+	    var $value = document.querySelector('main form [name="value"]')
+
+	    var qr = window.qr = new QRious({
+	      element: document.getElementById('qrious'),
+	      size: 250,
+	      value: 'http://www.baidu.com/'
+	    })
+
+	    $background.addEventListener('change', function() {
+	      qr.background = $background.value || null
+	    })
+
+	    $foreground.addEventListener('change', function() {
+	      qr.foreground = $foreground.value || null
+	    })
+
+	    $level.addEventListener('change', function() {
+	      qr.level = $level.value
+	    })
+
+	    $size.addEventListener('change', function() {
+	      if (!$size.validity.valid) {
+	        return
+	      }
+
+	      qr.size = $size.value || null
+
+	      $section.style.minWidth = qr.size + 'px'
+	    })
+
+	    $value.addEventListener('input', function() {
+	      qr.value = $value.value
+	    })
+	  })()
+	</script>
+
+</body>
+</html>

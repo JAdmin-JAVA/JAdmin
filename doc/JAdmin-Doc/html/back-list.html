@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../css/global-v1.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/layer/default/layer.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/code.css" media="all">
+		<script src="../layui/layui.all.js" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="site-content">
+			<h1 class="site-h1">列表页面</h1>
+
+			<blockquote class="site-tips site-text">
+				JAdmin核心功能就是快速实现对数据表的增删改查操作，接下来已sys_config系统配置表为例，为大家讲解列表页面的使用。
+			</blockquote>
+			
+			<div class="site-text">
+				<p>列表页面需要一个JavaBean类和一个Controller类。</p>
+				<p>JavaBean需要继承AbstractValueObject类，代码如下：</p>
+				<pre class="layui-code">@Entity @Getter @Setter
+					@Table(name = "sys_config")
+					public class ConfigVO extends AbstractValueObject {
+					
+					    /** 序列号 */
+					    private static final long serialVersionUID = 1l;
+					     
+					    @Id
+					    @GeneratedValue(generator = "system-uuid")
+					    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+					    @Column(length = 32)
+					    public String configId;
+					     
+					    @Column(length = 128)
+					    private String name;
+					     
+					    @Column(length = 128)
+					    private String code;
+					     
+					    @Column
+					    private String coValue;
+					
+					    @Column(length = 1)
+					    private String isOpen;
+					     
+					    @Column(length = 19)
+					    private String operateTime;
+					     
+					    @Column(length = 32)
+					    private String operatorId;
+					 
+					    @Column(length = 1)
+					    private String billStatus;
+					 
+					    @Column(length = 512)
+					    private String memo;
+					 
+					    @Override
+					    public String getPrimaryKey() {
+					        return configId;
+					    }
+					 
+					    public void setPrimaryKey(String key) {
+					        this.configId = (String) key;
+					    }
+					}</pre>
+				<p>Controller需要继承CommonListController《T extends AbstractValueObject》类，代码如下：</p>
+				<pre class="layui-code">@Controller
+					@RequestMapping("/config") // 定义前台url访问的基础路径
+					@AdminPage(menu = AdminPageMenu.baseCenter, name = "系统设置") // 将页面注入到菜单
+					public class ConfigController extends CommonListController<ConfigVO> {
+					 
+					    @TableColumn(value = "名称", search = true)
+					    public String name;
+					 
+					    @TableColumn(value = "code", search = true)
+					    public String code;
+					 
+					    @TableColumn(value = "value")
+					    public String coValue;
+ 
+					    @TableColumn(value = "操作时间")
+					    public String operateTime;
+					 
+					    @TableColumn(value = "操作人")
+					    public String operatorId;
+					}</pre>
+				<p>页面显示如下图所示：</p>
+				<img src="../images/list-1.png" />
+				<p>列表页面可以不注入到菜单里面，单独来使用。列表页面的url路径为：{RequestMapping-value}/getAll</p>
+				
+				<p>列表页面有以下注解可以配套使用：</p>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>注解名称</th>
+							<th style="min-width: 60px;">使用对象</th>
+							<th>用途说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>@FileConfig</td>
+							<td>类注解</td>
+							<td>页面对应的jsp和js的设置，可以自定义jsp页面，也可以嵌入指定的js</td>
+						</tr>
+						<tr>
+							<td>@AdminPageNoButton</td>
+							<td>类注解</td>
+							<td>声明页面中不需要的button，默认显示删除、添加、编辑 3个按钮</td>
+						</tr>
+						<tr>
+							<td>@DeleteMode</td>
+							<td>类注解</td>
+							<td>定义删除的策略 真删还是修改状态</td>
+						</tr>
+						<tr>
+							<td>@TableHql</td>
+							<td>类注解</td>
+							<td>定义列表界面的where条件和 排序</td>
+						</tr>
+						<tr>
+							<td>@Power</td>
+							<td>类注解</td>
+							<td>列表页面数据的权限过滤策略，子机构只能看到自己的数据，父机构能够看到自己和子机构的数据</td>
+						</tr>
+						<tr>
+							<td>@SearchMode</td>
+							<td>类注解</td>
+							<td>定义搜索策略，默认使用精简搜索模式</td>
+						</tr>
+						<tr>
+							<td>@InitNoData</td>
+							<td>类注解</td>
+							<td>声明该注解之后，列表界面默认没有数据，搜索后才会显示</td>
+						</tr>
+						<tr>
+							<td>@SinglePage</td>
+							<td>类注解</td>
+							<td>声明后为单个页面，直接跳转到编辑页面，而不是列表页面</td>
+						</tr>
+						<tr>
+							<td>@Tree</td>
+							<td>类注解</td>
+							<td>声明是属性结构的列表界面</td>
+						</tr>
+						<tr>
+							<td>@TableColumn</td>
+							<td>字段注解 </td>
+							<td>用来定义列表页面显示的字段</td>
+						</tr>
+						<tr>
+							<td>@OrderByColumn</td>
+							<td>字段注解</td>
+							<td>声明该注解，可給据该字段排序<img style="margin-left: 30px; max-width: 260px;" src="../images/list-2.png"/></td>
+						</tr>
+						<tr>
+							<td>@SearchColumn</td>
+							<td>字段注解</td>
+							<td>如果要使用更复杂的搜索功能，或者是字段不在表格中显示，确需要在搜索组件中显示，可以使用只SearchColumn注解</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<p>@AdminPageNoButton、@InitNoData、@OrderByColumn相对简单，这里不再讲解。</p>
+				
+				<p>@FileConfig注解，可以自定义jsp页面，也可以嵌入指定的js，注解参数详细介绍：</p>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>参数名称</th>
+							<th>参数类型</th>
+							<th>默认值</th>
+							<th>参数说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>selfJsp</td>
+							<td>String[]</td>
+							<td>{}</td>
+							<td>需要自定义的jsp，可自定义的jsp有 list、edit；</br>
+								默认为空，将使用通用的admin/common/*.jsp；</br>
+								如果声明list为自定义，将使用admin/business/{url}/data-list.jsp页面；</br>
+								如果声明edit为自定义，将使用admin/business/{url}/data-edit.jsp页面；</td>
+						</tr>
+						<tr>
+							<td>jspBaseUrl</td>
+							<td>String</td>
+							<td>空</td>
+							<td>定义后将使用该路径作为jsp基础路径，默认路径是admin/business/{url}</td>
+						</tr>
+						<tr>
+							<td>editJs</td>
+							<td>String</td>
+							<td>空</td>
+							<td>edit需要特殊加载的js</td>
+						</tr>
+						<tr>
+							<td>listJs</td>
+							<td>String</td>
+							<td>空</td>
+							<td>list需要特殊加载的js</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<p>@DeleteMode注解，定义删除的策略，真删还是修改状态，注解参数详细介绍：</p>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>参数名称</th>
+							<th>参数类型</th>
+							<th>默认值</th>
+							<th>参数说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>value</td>
+							<td>int</td>
+							<td>无默认</td>
+							<td>删除策略 DeleteMode.DELETE为真删，DeleteMode.UPDATE为更新状态</td>
+						</tr>
+						<tr>
+							<td>updateKey</td>
+							<td>String</td>
+							<td>isDelete</td>
+							<td>更新状态策略时有效，定义給据哪个字段更新</td>
+						</tr>
+						<tr>
+							<td>updateValue</td>
+							<td>String</td>
+							<td>1</td>
+							<td>更新状态策略时有效，删除状态对应的值 默认1</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<p>@TableHql注解，定义列表界面的where条件和 排序，注解参数详细介绍：</p>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>参数名称</th>
+							<th>参数类型</th>
+							<th>默认值</th>
+							<th>参数说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>value</td>
+							<td>String</td>
+							<td>空</td>
+							<td>列表界面的where条件</td>
+						</tr>
+						<tr>
+							<td>orderBy</td>
+							<td>String</td>
+							<td>空</td>
+							<td>列表界面排序</td>
+						</tr>
+						<tr>
+							<td>pageSize</td>
+							<td>int</td>
+							<td>-1</td>
+							<td>定义分页的大小，默认-1将使用系统配置“DEF_PAGESIZE”的值</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<p>@Power注解，定义数据权限，注解参数详细介绍：</p>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>参数名称</th>
+							<th>参数类型</th>
+							<th>默认值</th>
+							<th>参数说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>value</td>
+							<td>int</td>
+							<td>ORG</td>
+							<td>数据权限策略，Power.ORG表示显示当前机构和子机构的数据，Power.SELF_ORG表示显示当前机构的数据，Power.USER表示显示当前用户的数据</td>
+						</tr>
+						<tr>
+							<td>orgKey</td>
+							<td>String</td>
+							<td>org.seq</td>
+							<td>Power.ORG时有效，当前vo所对应机构的seq的属性</td>
+						</tr>
+						<tr>
+							<td>userKey</td>
+							<td>String</td>
+							<td>空</td>
+							<td>Power.USER时有效，当前vo所对应用户的属性</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<p>@SearchMode注解，定义搜索策略，注解参数详细介绍：</p>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>参数名称</th>
+							<th>参数类型</th>
+							<th>默认值</th>
+							<th>参数说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>defType</td>
+							<td>int</td>
+							<td>EASY_TYPE</td>
+							<td>搜索的模式 SearchMode.EASY_TYPE-精简搜索，SearchMode.COMPLEX_TYPE-复杂搜索</td>
+						</tr>
+						<tr>
+							<td>dateColumn</td>
+							<td>String</td>
+							<td>空</td>
+							<td>声明该字段后，将会显示一个日期范围的搜索组件<img style="max-width: 560px;" src="../images/list-3.png"/></td>
+						</tr>
+						<tr>
+							<td>pageSize</td>
+							<td>String</td>
+							<td>yyyy-MM-dd</td>
+							<td>日期的类型，dateColumn不为空时有效</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<p>@SinglePage注解，声明后为单个页面，直接跳转到编辑页面，而不是列表页面，注解参数详细介绍：</p>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>参数名称</th>
+							<th>参数类型</th>
+							<th>默认值</th>
+							<th>参数说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>value</td>
+							<td>String</td>
+							<td>空</td>
+							<td>单个页面配置属性，值为该vo的主键，可使用关键词：userId, orgId，表示的是当前登陆用户的id和机构id</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<p>@Tree注解，声明是属性结构的列表界面，注解参数详细介绍：</p>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>参数名称</th>
+							<th>参数类型</th>
+							<th>默认值</th>
+							<th>参数说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>sql</td>
+							<td>String</td>
+							<td>SELECT seq id, orgFSeq pId, name FROM sys_org where isDelete = 0 and billStatus = 1</td>
+							<td>如果不是通过方法自定义数据，将使用sql自定义树的json数据里面的必填字段有：</br>
+								id 节点id</br>
+								name 节点名称</br>
+						    	选填字段有：</br>
+						    	pId 所属父节点 如果顶级节点，设置为0（可选，为空表示只是一级结构）</br>
+						    	rId 如果rId存在，id只负责和pId对应，选择后保存的值是rId</br>
+						    	nocheck 如果为false或者0，该节点不能被选中（nocheck属性同样支持selectCode，但是只支持动态的数据词典）
+							</td>
+						</tr>
+						<tr>
+							<td>selectCode</td>
+							<td>String</td>
+							<td>空</td>
+							<td>select类型的数据词典，如果该字段不为空，将无视sql</td>
+						</tr>
+						<tr>
+							<td>fieldKey</td>
+							<td>String</td>
+							<td>org.seq</td>
+							<td>当前vo所对应的关键词，默认是 like 匹配，如果需要特殊处理，可重新getTreeHqlWhere方法</td>
+						</tr>
+						<tr>
+							<td>jsonKey</td>
+							<td>String</td>
+							<td>id</td>
+							<td>点击tree的节点之后，传递到后台的值，默认传递id</td>
+						</tr>
+						<tr>
+							<td>methodCustom</td>
+							<td>boolean</td>
+							<td>false</td>
+							<td>是否需要通过方法 自定义树的json数据，通过重新getTreeData方法来实现自定义</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<p>@TableColumn注解，来定义页面中显示的字段，注解参数详细介绍：</p>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>参数名称</th>
+							<th>参数类型</th>
+							<th>默认值</th>
+							<th>参数说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>value</td>
+							<td>String</td>
+							<td>空</td>
+							<td>字段的名称，如果为空将使用FormColunm的value值</td>
+						</tr>
+						<tr>
+							<td>column</td>
+							<td>String</td>
+							<td>空</td>
+							<td>对应的JavaBean字段，默认使用的是变量的值，不需要定义。如果是多/一对一里面另一个对象的属性，可以填写{对象名}.{属性}</td>
+						</tr>
+						<tr>
+							<td>selectCode</td>
+							<td>String</td>
+							<td>空</td>
+							<td>select类型的数据词典，比如性别数据库里面存的是0/1，在这里填写sex，界面会显示男/女</td>
+						</tr>
+						<tr>
+							<td>img</td>
+							<td>boolean</td>
+							<td>false</td>
+							<td>是否是图片，如果是true，该列将显示为图片</td>
+						</tr>
+						<tr>
+							<td>videoPath</td>
+							<td>String</td>
+							<td>空</td>
+							<td>视频的路径，如果是视频，该列将img作为缩略图显示，点击后会播放视频</td>
+						</tr>
+						<tr>
+							<td>maxLength</td>
+							<td>int</td>
+							<td>-1</td>
+							<td>显示的最大长度，默认 显示全部</td>
+						</tr>
+						<tr>
+							<td>search</td>
+							<td>boolean</td>
+							<td>false</td>
+							<td>是否在搜索组件中显示</td>
+						</tr>
+						<tr>
+							<td>javaType</td>
+							<td>JavaType</td>
+							<td>JavaType.String</td>
+							<td>搜索字段，查询时的Java类型</td>
+						</tr>
+						<tr>
+							<td>exportColumn</td>
+							<td>String</td>
+							<td>空</td>
+							<td>导出时用的字段，为空将默认column</td>
+						</tr>
+						<tr>
+							<td>export</td>
+							<td>boolean</td>
+							<td>true</td>
+							<td>字段是否可以导出 ，默认导出</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<p>@SearchColumn注解，可以单独定义搜索组件，注解参数详细介绍：</p>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>参数名称</th>
+							<th>参数类型</th>
+							<th>默认值</th>
+							<th>参数说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>value</td>
+							<td>String</td>
+							<td>空</td>
+							<td>字段的名称，如果为空将使用FormColunm的value值</td>
+						</tr>
+						<tr>
+							<td>column</td>
+							<td>String</td>
+							<td>空</td>
+							<td>对应的JavaBean字段，默认使用的是变量的值，不需要定义。如果是多/一对一里面另一个对象的属性，可以填写{对象名}.{属性}</td>
+						</tr>
+						<tr>
+							<td>selectCode</td>
+							<td>String</td>
+							<td>空</td>
+							<td>select类型的数据词典，比如性别数据库里面存的是0/1，在这里填写sex，界面会显示男/女</td>
+						</tr>
+						<tr>
+							<td>javaType</td>
+							<td>JavaType</td>
+							<td>JavaType.String</td>
+							<td>搜索字段，查询时的Java类型</td>
+						</tr>
+						<tr>
+							<td>initDefault</td>
+							<td>String</td>
+							<td>空</td>
+							<td>搜索的初始值，默认列表界面查询时，会加上改值</td>
+						</tr>
+						<tr>
+							<td>initDefaultMethodGet</td>
+							<td>boolean</td>
+							<td>false</td>
+							<td>搜索的初始值，如果为true，说明需要初始化值，值为通过get方法获取 </td>
+						</tr>
+					</tbody>
+				</table>
+				<p>可以通过application.yml的jadmin.adminPage参数，设置页面的显示顺序：</p>
+				<pre class="layui-code">#该属性为后台页面的显示顺序，写在前面，就显示在前面
+				adminPage: #List
+				 - 角色管理
+				 - 用户管理
+				 - 系统设置
+				 - 数据字典
+				 - 系统日志</pre>
+			</div>
+
+		</div>
+		
+		<script>
+			layui.use('code', function(){ //加载code模块
+			  layui.code(); //引用code方法
+			});
+		</script>
+	</body>
+</html>

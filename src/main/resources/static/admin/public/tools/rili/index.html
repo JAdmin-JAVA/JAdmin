@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title></title>
+		<link href="css/theme.min.css" type="text/css" rel="stylesheet" />
+		<link href="css/style.css" type="text/css" rel="stylesheet" />
+	</head>
+
+	<body style="overflow: hidden;"> 
+		<div class="aboluo-w-700">
+			<div class="aboluo-rightdiv">
+				<p class="aboluo-xssj"></p>
+				<p class="aboluo-currday" style="display: none;"></p>
+				<p class="aboluo-ssjjr" style="display:none;"></p>
+				<p class="aboluo-xsmx"></p>
+				<p class="aboluo-bwq">
+					<a class="aboluo-add" href="javascript:;" onclick="aboluoAdd();">+</a>
+					<span>备忘笺</span>
+					<textarea _id="" _date="" id="aboluo-textarea" onkeyup="javascript:savememo(this);"></textarea>
+				</p>
+			</div>
+			<div class="aboluo-leftdiv">
+				<div class="aboluo-tools">
+					<div class="aboluo-calendar-select-year"></div>
+					<div class="aboluo-calendar-month">
+						<a class="aboluo-month-a-perv" href="javascript:;">&lt; </a>
+						<a class="aboluo-month-a-next" href="javascript:;"> &gt;</a>
+					</div>
+					<input type="button" class="aboluo-toToday" value="返回今天" />
+				</div>
+				<div class="aboluo-rilidiv">
+					<table class="aboluo-rilitable" cellspacing="0" cellpadding="0">
+						<thead class="aboluo-rilithead">
+							<tr>
+								<td>一</td>
+								<td>二</td>
+								<td>三</td>
+								<td>四</td>
+								<td>五</td>
+								<td style="color:red;">六</td>
+								<td style="color:red;">日</td>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+		<script src="js/jquery.js"></script>
+		<script src="js/lanren.js"></script>
+		<!-- 代码部分end -->
+	</body>
+
+</html>

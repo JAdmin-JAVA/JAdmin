@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../css/global-v1.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/layer/default/layer.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/code.css" media="all">
+		<script src="../layui/layui.all.js" charset="utf-8"></script>
+		<style>
+			img{border: 1px solid #999;}
+		</style>
+	</head>
+	<body>
+		<div class="site-content">
+			<h1 class="site-h1">体验插件</h1>
+			
+			<blockquote class="site-tips site-text">
+				JAdmin-Plug是JAdmin团队，呕心沥血打造的辅助开发插件，目前只支持Eclipse/STS，以下是JAdmin-Plug的功能清单。
+			</blockquote>
+
+			<fieldset class="layui-elem-field layui-field-title site-title">
+				<legend>
+					<a name="classical">1、代码自动生成</a>
+				</legend>
+			</fieldset>
+			
+			<div class="site-text">
+			    <img src="../images/plug-autoClass.png">
+				<p>如上图所示，JAdmin-Plug会通过 项目数据库配置信息，自动遍历所有表，并按照未生成、已生成、系统表分类显示，选择页面所在菜单后，JAdmin-Plug会在项目对应路径下生成
+					Controller类和JavaBean类。</p>
+			</div>
+
+			<fieldset class="layui-elem-field layui-field-title site-title">
+				<legend>
+					<a name="classical">2、代码辅助提示</a>
+				</legend>
+			</fieldset>
+			
+			<div class="site-text">
+			    <img src="../images/plug-vo.png">
+			    <img src="../images/plug-menu.png">
+			    <img src="../images/plug-icon.png">
+			    <img src="../images/plug-iconTip.png">
+			    <img src="../images/plug-classComments.png">
+			    <img src="../images/plug-dJob.png">
+			    <img src="../images/plug-code.png">
+			    <img src="../images/plug-type.png">
+			</div>
+
+			<fieldset class="layui-elem-field layui-field-title site-title">
+				<legend>
+					<a name="classical">3、数据库文档自动生成</a>
+				</legend>
+			</fieldset>
+			
+			<div class="site-text">
+			    <img src="../images/plug-sqldoc.png">
+			</div>
+
+			<fieldset class="layui-elem-field layui-field-title site-title">
+				<legend>
+					<a name="classical">4、翻译</a>
+				</legend>
+			</fieldset>
+			
+			<div class="site-text">
+			    <img src="../images/plug-translate.png">
+			</div>
+
+			<fieldset class="layui-elem-field layui-field-title site-title">
+				<legend>
+					<a name="classical">5、sql生成器</a>
+				</legend>
+			</fieldset>
+			
+			<div class="site-text">
+			    <img src="../images/plug-sqlcreate.png">
+			</div>
+
+			<fieldset class="layui-elem-field layui-field-title site-title">
+				<legend>
+					<a name="classical">6、页面对应类快速定位</a>
+				</legend>
+			</fieldset>
+			
+			<div class="site-text">
+			    <img src="../images/plug-webSearch.png">
+			</div>
+			
+		</div>
+		
+		<script>
+			layui.use('code', function(){ //加载code模块
+			  layui.code(); //引用code方法
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../css/global-v1.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/layer/default/layer.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/code.css" media="all">
+		<script src="../layui/layui.all.js" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="site-content">
+			<h1 class="site-h1">编辑页面</h1>
+
+			<blockquote class="site-tips site-text">
+				编辑页面包括数据的添加和修改页面，接下来已sys_config系统配置表为例，为大家讲解编辑页面的使用。
+			</blockquote>
+			
+			<div class="site-text">
+				<p>在列表页面的控制层中，为字段添加@FormColunm注解，就可以将该字段显示到编辑页面，代码如下：</p>
+				<pre class="layui-code">public class ConfigController extends CommonListController<ConfigVO> {
+   
+				    @FormColunm(value = "名称")
+				    @TableColumn(search = true)
+				    public String name;
+				  
+				    @FormColunm(value = "code")
+				    @TableColumn(search = true)
+				    @UniqueColunm // 编号不能重复
+				    public String code;
+				 
+				    @FormColunm(value = "value",required = false)
+				    @TableColumn
+				    public String coValue;
+				 
+				    @InitDefaultColunm("1") // 系统添加的全部默认开放
+				    public String isOpen;
+				 
+				    @TableColumn(value = "操作时间")
+				    public String operateTime;
+				 
+				    @TableColumn(value = "操作人")
+				    public String operatorId;
+				 
+				    @InitDefaultColunm("1")
+				    public String billStatus;
+				 
+				    @FormColunm(value = "描述", type = "textarea", length = 512, required = false)
+				    public String memo;
+					 
+				    @Override
+				    public void afterDataChange() {
+				        StartCacheUtil.refurbish("configs");
+				    }
+				}</pre>
+				
+				<p>编辑页面有以下注解可以配套使用：</p>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>注解名称</th>
+							<th style="min-width: 60px;">使用对象</th>
+							<th>用途说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>@FormColunm</td>
+							<td>字段注解 </td>
+							<td>用来定义编辑页面显示的字段</td>
+						</tr>
+						<tr>
+							<td>@InitDefaultColunm</td>
+							<td>字段注解</td>
+							<td>用来定义新增时，字段的初始化值</td>
+						</tr>
+						<tr>
+							<td>@UniqueColunm</td>
+							<td>字段注解</td>
+							<td>声明该注解后，该列的值在数据库中唯一 </td>
+						</tr>
+						<tr>
+							<td>@UnEditColunm</td>
+							<td>字段注解</td>
+							<td>声明该字段如果是value中的值时，不能编辑和删除</td>
+						</tr>
+						<tr>
+							<td>@SelectShow</td>
+							<td>字段注解</td>
+							<td>当声明该注解后，默认不显示该字段，只有定义的selectColumn下拉框选中为value值后，才显示该字段</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<p>@FormColunm注解，用来定义编辑页面显示的字段，注解参数详细介绍：</p>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>参数名称</th>
+							<th>参数类型</th>
+							<th>默认值</th>
+							<th>参数说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>value</td>
+							<td>String[]</td>
+							<td>无默认</td>
+							<td>字段的名称</td>
+						</tr>
+						<tr>
+							<td>lable</td>
+							<td>String</td>
+							<td>空</td>
+							<td>字段描述 例如：
+								<img style="max-width: 560px; margin:0px;" src="../images/edit-1.png"/>
+							</td>
+						</tr>
+						<tr>
+							<td>column</td>
+							<td>String</td>
+							<td>空</td>
+							<td>对应的JavaBean字段，默认使用的是变量的值，不需要定义。如果是多/一对一里面另一个对象的属性，可以填写{对象名}.{属性}</td>
+						</tr>
+						<tr>
+							<td>type</td>
+							<td>String</td>
+							<td>input</td>
+							<td>字段类型，目前的类型有：</br>
+							input 输入框
+							speedInput 快速输入框
+							select 单选、多选
+							textarea
+							date 日期选择器
+							xy 地图坐标选择器
+							upFile 文件上传组件
+							editor 富文本编辑器
+							table 表格组件
+							</td>
+						</tr>
+						<tr>
+							<td>required</td>
+							<td>boolean</td>
+							<td>true</td>
+							<td>是否必须输入，默认必须输入</td>
+						</tr>
+						<tr>
+							<td>selectCode</td>
+							<td>String</td>
+							<td>空</td>
+							<td>select类型的数据词典，单选还是多选是在数据词典中定义的</td>
+						</tr>
+						<tr>
+							<td>selectStyle</td>
+							<td>String</td>
+							<td>def</td>
+							<td>select的样式 目前3中：tree风格、风格icheck、默认风格</td>
+						</tr>
+						<tr>
+							<td>speedSelectCode</td>
+							<td>String</td>
+							<td>空</td>
+							<td>快速输入的 select类型的数据词典</td>
+						</tr>
+						<tr>
+							<td>nullmsg</td>
+							<td>String</td>
+							<td>空</td>
+							<td>为空的提示</td>
+						</tr>
+						<tr>
+							<td>datatype</td>
+							<td>String</td>
+							<td>空</td>
+							<td>效验规则</td>
+						</tr>
+						<tr>
+							<td>dateFmt</td>
+							<td>String</td>
+							<td>空</td>
+							<td>日期格式</td>
+						</tr>
+						<tr>
+							<td>maxDate</td>
+							<td>String</td>
+							<td>空</td>
+							<td>是否默认选择日期大于当前日期</td>
+						</tr>
+						<tr>
+							<td>dateFmt</td>
+							<td>String</td>
+							<td>空</td>
+							<td>日期格式</td>
+						</tr>
+						<tr>
+							<td>encode</td>
+							<td>String</td>
+							<td>空</td>
+							<td>字段加密方式 目前只支持md5和des，默认不加密</td>
+						</tr>
+						<tr>
+							<td>edit</td>
+							<td>String</td>
+							<td>true</td>
+							<td>表单界面的列，是否可以编辑，true表示可编辑，false表示不可编辑，hidden表示隐藏该列, notEdit表示可以添加，不可以编辑</td>
+						</tr>
+						<tr>
+							<td>ajaxurl</td>
+							<td>String</td>
+							<td>空</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>x</td>
+							<td>String</td>
+							<td>空</td>
+							<td>标注地图时，用到的经度 对应的字段</td>
+						</tr>
+						<tr>
+							<td>y</td>
+							<td>String</td>
+							<td>空</td>
+							<td>标注地图时，用到的维度 对应的字段</td>
+						</tr>
+						<tr>
+							<td>picPath</td>
+							<td>String</td>
+							<td>空</td>
+							<td>图片上传路径</td>
+						</tr>
+						<tr>
+							<td>editShow</td>
+							<td>boolean</td>
+							<td>true</td>
+							<td>添加的时候是否显示</td>
+						</tr>
+						<tr>
+							<td>editShow</td>
+							<td>Class<? extends CommonListController></td>
+							<td>Null.class</td>
+							<td>编辑页面的表格，对应的vo控制类的class</td>
+						</tr>
+						<tr>
+							<td>idColunm</td>
+							<td>String</td>
+							<td>空</td>
+							<td>编辑页面的表格，对应的vo的外键，为空的话表示只显示，不update</td>
+						</tr>
+						<tr>
+							<td>tableHiddleColumn</td>
+							<td>String</td>
+							<td>空</td>
+							<td>编辑页面的表格，需要隐藏的列，从1开始，多个列用逗号分开</td>
+						</tr>
+						<tr>
+							<td>initValue</td>
+							<td>String</td>
+							<td>空</td>
+							<td>内容为空时的默认值</td>
+						</tr>
+						<tr>
+							<td>widthScale</td>
+							<td>int</td>
+							<td>100</td>
+							<td>属性所在宽度比例，目前只有100，50 两个值</td>
+						</tr>
+						<tr>
+							<td>length</td>
+							<td>int</td>
+							<td>-1</td>
+							<td>允许的最大长度，目前只有textarea 有效</td>
+						</tr>
+						<tr>
+							<td>mutipleSplit</td>
+							<td>String</td>
+							<td>空</td>
+							<td>是否运行添加多个，默认为空，不为空输入多个属性的分隔符</td>
+						</tr>
+						
+					</tbody>
+				</table>
+				
+				<p>@InitDefaultColunm注解，用来定义新增时，字段的初始化值，注解参数详细介绍：</p>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>参数名称</th>
+							<th>参数类型</th>
+							<th>默认值</th>
+							<th>参数说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>value</td>
+							<td>String</td>
+							<td>INITDEFAULTCOLUNM</td>
+							<td>新增时，字段的初始化值，当属性为以下关键词时，定义@InitDefaultColunm注解后，会自动赋值：</br>
+								operateTime（当前时间戳，格式为yyyy-mm-dd hh:mm:ss）</br>
+								operatorId</br>
+							</td>
+						</tr>
+						<tr>
+							<td>column</td>
+							<td>String</td>
+							<td>空</td>
+							<td>字段</td>
+						</tr>
+						<tr>
+							<td>javaType</td>
+							<td>String</td>
+							<td>JavaType.String</td>
+							<td>Java类型，默认是String类型，声明后，会转换为其他类型</td>
+						</tr>
+						<tr>
+							<td>sysConfigCode</td>
+							<td>String</td>
+							<td>空</td>
+							<td>如果是系统配置里面的值，设置该字段</td>
+						</tr>
+						<tr>
+							<td>methodGet</td>
+							<td>boolean</td>
+							<td>false</td>
+							<td>是否通过get方法初始化值，比如column为name，需要声明该方法：
+								<pre class="layui-code">public String getName() {
+								    return "";
+								}</pre></td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<p>@UnEditColunm注解，声明该字段如果是value中的值时，不能编辑和删除，注解参数详细介绍：</p>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>参数名称</th>
+							<th>参数类型</th>
+							<th>默认值</th>
+							<th>参数说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>value</td>
+							<td>String[]</td>
+							<td>无默认</td>
+							<td>当改字段的值为value中的值时，不允许修改和删除</td>
+						</tr>
+						<tr>
+							<td>column</td>
+							<td>String</td>
+							<td>空</td>
+							<td>字段</td>
+						</tr>
+						<tr>
+							<td>allowDel</td>
+							<td>boolean</td>
+							<td>false</td>
+							<td>是否允许删除 默认不允许</td>
+						</tr>
+						<tr>
+							<td>allowUpdate</td>
+							<td>boolean</td>
+							<td>false</td>
+							<td>是否允许修改  默认不允许</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<p>@SelectShow注解，用来设置下拉单选组件 与其他组件联动，当声明该注解后，默认不显示该组件，只有定义的selectColumn下拉框选中为value值后，才显示该组件，注解参数详细介绍：</p>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>参数名称</th>
+							<th>参数类型</th>
+							<th>默认值</th>
+							<th>参数说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>selectColumn</td>
+							<td>String</td>
+							<td>无默认</td>
+							<td>选择下拉框的列名</td>
+						</tr>
+						<tr>
+							<td>value</td>
+							<td>String[]</td>
+							<td>无默认</td>
+							<td>选择下拉框的值</td>
+						</tr>
+					</tbody>
+				</table>
+				
+			</div>
+
+		</div>
+		
+		<script>
+			layui.use('code', function(){ //加载code模块
+			  layui.code(); //引用code方法
+			});
+		</script>
+	</body>
+</html>

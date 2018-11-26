@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../css/global-v1.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/layer/default/layer.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/code.css" media="all">
+		<script src="../layui/layui.all.js" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="site-content">
+			<h1 class="site-h1">其他内容</h1>
+				
+			<div class="site-text">
+					 
+				<fieldset class="layui-elem-field layui-field-title site-title">
+					<legend>
+						<a name="classical">Dao层使用</a>
+					</legend>
+				</fieldset>
+				
+				<p>建议将Dao层放到com.jadmin.dao包下，dao层需要继承BaseBusinessDao，BaseBusinessDao内置了JdbcTemplate、EntityManager两种数据库操作类。</p>
+				<p>JdbcTemplate是Spring对数据库的操作在jdbc上面做了深层次的封装，其全名为org.springframework.jdbc.core.JdbcTemplate，
+					JdbcTemplate主要提供以下五类方法：</br>
+					 · execute方法：可以用于执行任何SQL语句，一般用于执行DDL语句；</br>
+					 · update方法及batchUpdate方法：update方法用于执行新增、修改、删除等语句；</br>
+					 · batchUpdate方法用于执行批处理相关语句；</br>
+					 · query方法及queryForXXX方法：用于执行查询相关语句；</br>
+					 · call方法：用于执行存储过程、函数相关语句。</br>
+					更多介绍：<a href="https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/jdbc/core/JdbcTemplate.html" target="_blank">点击阅读EntityManager的官网API</a>
+				</p>
+				<p>EntityManager是JPA中，对实体Bean进行增删改查的接口，他可以用来产生/删除持久化的实体Bean，通过主键查找实体bean，也可以通过EJB3 QL 语言查找满足条件的实体Bean，
+					<a href="https://docs.oracle.com/javaee/7/api/javax/persistence/EntityManager.html" target="_blank">点击阅读EntityManager的官网API</a>
+				</p>
+				<p>BaseBusinessDao还内置了一些数据库操作的工具方法，具体可查阅源代码。Dao层可以通过@Autowired注入：</p>
+				<pre class="layui-code">@Autowired
+				private SystemDao systemDao;</pre>
+				<p>也可以通过SpringContext获取：</p>
+				<pre class="layui-code">SystemDao systemDao = SpringContext.getBean(SystemDao.class); </pre>
+				
+				<fieldset class="layui-elem-field layui-field-title site-title">
+					<legend>
+						<a name="classical">登陆拦截</a>
+					</legend>
+				</fieldset>
+				
+				<p>默认所有的url都需要登陆后才能访问，对于不需要登陆就可以访问的url，需要声明@NoNeedLogin注解。
+					@NoNeedLogin可以声明在控制层的类注解，也可以声明在方法注解。当声明到类注解，类里面所有url均生效。</p>
+					
+				<fieldset class="layui-elem-field layui-field-title site-title">
+					<legend>
+						<a name="classical">页面静态化</a>
+					</legend>
+				</fieldset>
+				
+				<p>可以通过@PageStatic注解对某个url静态化，当访问该url时，将会访问静态的html文件。注解参数详细介绍：</p>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>参数名称</th>
+							<th>参数类型</th>
+							<th>默认值</th>
+							<th>参数说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>refreshTime</td>
+							<td>String</td>
+							<td>-1</td>
+							<td>自动刷新页面，单位为分钟，默认不刷新</td>
+						</tr>
+					</tbody>
+				</table>
+					
+				<fieldset class="layui-elem-field layui-field-title site-title">
+					<legend>
+						<a name="classical">日志文件</a>
+					</legend>
+				</fieldset>
+				
+				<p>日志文件指的是项目每天生成的.log日志文件，系统采用logback记录日志，用户需要修改logback.xml配置文件，修改日志路径与日志名称：</p>
+				<pre class="layui-code"><appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">  
+				    <file>D:/logs/jAdmin.log</file>  
+				    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+				        <fileNamePattern>D:/logs/jAdmin.%d{yyyy-MM-dd}.log.zip</fileNamePattern>  
+				    </rollingPolicy>
+				    <layout class="ch.qos.logback.classic.PatternLayout">  
+				        <pattern>%-20(%d{HH:mm:ss.SSS} [%thread]) %-5level %logger{80} - %msg%n</pattern>  
+				    </layout>
+				</appender></pre>
+			</div>
+		</div>
+		
+		<script>
+			layui.use('code', function(){ //加载code模块
+			  layui.code({
+				  encode: true //是否转义html标签。默认不开启
+			  });
+			});
+			
+		</script>
+	</body>
+</html>

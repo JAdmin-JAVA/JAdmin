@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../css/global-v1.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/layer/default/layer.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/code.css" media="all">
+		<script src="../layui/layui.all.js" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="site-content">
+			<h1 class="site-h1">工具方法</h1>
+			<blockquote class="site-tips site-text">
+				系统内置了一些工具类，包括数据加解密、数据词典、数据缓存、页面静态化、网络连接、文件操作、excel操作、日期与时间、json等工具类。
+			</blockquote>
+			<div class="site-text">
+				<p>加解密工具类 com.jadmin.modules.util.encode.Encode：</p>
+				
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th style="width: 270px;">返回类型</th>
+							<th>方法及说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>java.lang.String</td>
+							<td>encode(java.lang.String content, boolean isDecode)</br>
+								数据加密</br>
+								参数：</br>
+								content - 要加密的内容</br>
+								isDecode - 是否可以解密</br>
+								返回：加密后的内容</td>
+						</tr>
+						<tr>
+							<td>java.lang.String</td>
+							<td>decode(java.lang.String encodeContent)</br>
+								数据解密</br>
+								参数：</br>
+								encodeContent - 加密后的内容</br>
+								返回：解密后的内容</td>
+						</tr>
+						<tr>
+							<td>void</td>
+							<td>setKey(long enKey)</br>
+								设置可逆加密算法DES的密钥，默认密钥为1231234234l</br>
+								参数：</br>
+								enKey - 新的密钥</br>
+						</tr>
+					</tbody>
+				</table>
+				
+				<p>数据词典工具类 com.jadmin.modules.util.DictinfoUtils：</p>
+				
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th style="width: 270px;">返回类型</th>
+							<th>方法及说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>com.jadmin.vo.entity.base.DictkindVO</td>
+							<td>getDictkindById(java.lang.String id, javax.servlet.http.HttpServletRequest request)</br>
+								給据数据词典的id主键，获取数据词典DictkindVO对象</br>
+								参数：</br>
+								id - 数据词典的id主键</br>
+								request - request请求</br>
+								返回：数据词典DictkindVO对象</td>
+						</tr>
+						<tr>
+							<td>com.jadmin.vo.entity.base.DictkindVO</td>
+							<td>getDictkindByCode(java.lang.String code, javax.servlet.http.HttpServletRequest request)</br>
+								給据数据词典的code，获取数据词典DictkindVO对象</br>
+								参数：</br>
+								code - 数据词典的code</br>
+								request - request请求</br>
+								返回：数据词典DictkindVO对象</td>
+						</tr>
+						<tr>
+							<td>java.lang.String</td>
+							<td>getDictkindNameBykey(java.lang.String code, java.lang.String key, javax.servlet.http.HttpServletRequest request)</br>
+								給据code和key，获取name，比如給据sex和1，获取男</br>
+								参数：</br>
+								code - 数据词典的code</br>
+								key - 数据词典的key</br>
+								request - request请求</br>
+								返回：name
+							</td>
+						</tr>
+						<tr>
+							<td>java.lang.String</td>
+							<td>getDictkindKeyByName(java.lang.String code, java.lang.String name, javax.servlet.http.HttpServletRequest request)</br>
+								給据code和name，获取key，比如給据sex和男，获取1</br>
+								参数：</br>
+								code - 数据词典的code</br>
+								name - 数据词典的name</br>
+								request - request请求</br>
+								返回：key
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<p>数据缓存工具类 com.jadmin.modules.util.StartCacheUtil：</p>
+				
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th style="width: 270px;">返回类型</th>
+							<th>方法及说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>void</td>
+							<td>refurbish()</br>缓存所有数据</td>
+						</tr>
+						<tr>
+							<td>void</td>
+							<td>refurbish(java.lang.String code)</br>
+								缓存某个code的数据</br>
+								参数：</br>
+								code - code
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<p>页面静态化工具类 com.jadmin.modules.util.StaticPageUtils：</p>
+				
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th style="width: 270px;">返回类型</th>
+							<th>方法及说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>void</td>
+							<td>flushPage(java.lang.String url)</br>
+								刷新需要缓存的页面</br>
+								参数：</br>
+								url - 页面的url</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<p>其他工具类：</p>
+				
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th style="width: 270px;">工具类</th>
+							<th>工具类说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>com.jadmin.util.conn.ConnectionUtils</td>
+							<td>网络连接工具类</td>
+						</tr>
+						<tr>
+							<td>com.jadmin.util.file.FileUtil</td>
+							<td>文件操作工具类</td>
+						</tr>
+						<tr>
+							<td>com.jadmin.util.file.ExcelUtil</td>
+							<td>excel工具类</td>
+						</tr>
+						<tr>
+							<td>com.jadmin.util.DateTimeUtil</td>
+							<td>日期与时间工具类</td>
+						</tr>
+						<tr>
+							<td>com.jadmin.util.JsonUtil</td>
+							<td>json工具类</td>
+						</tr>
+						<tr>
+							<td>com.jadmin.util.UserAgentUtil</td>
+							<td>userAgent工具类</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+		
+		<script>
+			layui.use('code', function(){ //加载code模块
+			  layui.code(); //引用code方法
+			});
+		</script>
+	</body>
+</html>

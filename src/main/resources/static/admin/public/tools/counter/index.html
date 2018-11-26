@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>计算器</title>
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link href="css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/demo.css">
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+<div class="container">
+	<!-- Rounded switch -->
+	<label class="switch">
+		<input type="checkbox">
+		<span class="slider"></span>
+	</label>
+	<form>
+		<input readonly id="display1" type="text" class="form-control-lg text-right">
+		<input readonly id="display2" type="text" class="form-control-lg text-right">
+	</form>
+	
+	<div class="d-flex justify-content-between button-row">
+		<button id="left-parenthesis" type="button" class="operator-group">&#40;</button>
+		<button id="right-parenthesis" type="button" class="operator-group">&#41;</button>
+		<button id="square-root" type="button" class="operator-group">&#8730;</button>
+		<button id="square" type="button" class="operator-group">&#120;&#178;</button>
+	</div>
+  
+	<div class="d-flex justify-content-between button-row">
+		<button id="clear" type="button">&#67;</button>
+		<button id="backspace" type="button">&#9003;</button>
+		<button id="ans" type="button" class="operand-group">&#65;&#110;&#115;</button>
+		<button id="divide" type="button" class="operator-group">&#247;</button>
+	</div>
+	
+
+	<div class="d-flex justify-content-between button-row">
+		<button id="seven" type="button" class="operand-group">&#55;</button>
+		<button id="eight" type="button" class="operand-group">&#56;</button>
+		<button id="nine" type="button" class="operand-group">&#57;</button>
+		<button id="multiply" type="button" class="operator-group">&#215;</button>
+	</div>
+
+	
+	<div class="d-flex justify-content-between button-row">
+		<button id="four" type="button" class="operand-group">&#52;</button>
+		<button id="five" type="button" class="operand-group">&#53;</button> 
+		<button id="six" type="button" class="operand-group">&#54;</button> 
+		<button id="subtract" type="button" class="operator-group">&#8722;</button>
+	</div>
+
+	
+	<div class="d-flex justify-content-between button-row">
+		<button id="one" type="button" class="operand-group">&#49;</button> 
+		<button id="two" type="button" class="operand-group">&#50;</button>
+		<button id="three" type="button" class="operand-group">&#51;</button>
+		<button id="add" type="button" class="operator-group">&#43;</button>
+	</div>
+
+	<div class="d-flex justify-content-between button-row">
+		<button id="percentage" type="button" class="operand-group">&#37;</button>
+		<button id="zero" type="button" class="operand-group">&#48;</button>
+		<button id="decimal" type="button" class="operand-group">&#46;</button>
+		<button id="equal" type="button">&#61;</button>
+	</div>
+
+</div>	
+
+<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="js/math.min.js"></script>
+<script type="text/javascript" src="js/popper.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>

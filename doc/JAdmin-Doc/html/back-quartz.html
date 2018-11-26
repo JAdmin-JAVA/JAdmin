@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../css/global-v1.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/layer/default/layer.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/code.css" media="all">
+		<script src="../layui/layui.all.js" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="site-content">
+			<h1 class="site-h1">调度系统</h1>
+				
+			<blockquote class="site-tips site-text">
+				调度系统基于Quartz 2.3，系统启动时，会自动扫描调度代码，并将其显示到“调度管理”页面，用户可以查看调度当前状态、调度执行记录等，
+				也可以进行 修改调度时间、开启调度、关闭调度、立即执行一次等操作。</br></br>
+				 考虑到实际开发过程中，多人共用一套源码，所有人的调度及调度记录 都在同一个数据库，显示混乱。JAdmin调度系统，完全解决了这个问题，基于每台电脑IP存储相关数据，
+				在后台只能看到自己的调度和调度记录。
+			</blockquote>
+			
+			<div class="site-text">
+				<img src="../images/quartz-1.png" />
+				<p>系统要使用调度，需要在Spring Boot启动类WebApplication中，添加@EnableQuartz类注解，开启调度功能。</p>
+				<pre class="layui-code">@EnableQuartz //启动调度
+					public class WebApplication extends SpringBootServletInitializer implements WebMvcConfigurer{
+				}</pre>
+				<p>然后在com.jadmin.quartz包添加调度类，调度类需要继承BaseJob，并声明@DJob类注解，下面是一个调度类的例子：</p>
+				<pre class="layui-code">@DisallowConcurrentExecution // 声明该注解后，同一时间将只有一个Job实例被执行
+					@DJob(cron="0/5 * * * * ? ") // 设置调度cron时间
+					@Slf4j
+					public class HelloJob extends BaseJob{
+						
+					    public static void main(String[] args) {
+					        // 模拟测试该调度
+					        new HelloJob().start();
+					    }
+						    
+					    @Override
+					    public void execute(JobExecutionContext context) throws JobExecutionException {
+					        log.info("调度测试，数据库时间：" + baseDao.getJdbcTemplate().queryForObject("SELECT NOW()", String.class));
+					        try {
+					            // sleep了40秒，当前调度时间是5秒，声明@DisallowConcurrentExecution后，下一个调度会等待40秒后执行。
+					            Thread.sleep(40000);
+					        } catch (Exception e) {
+					            log.error(e.getMessage(), e);
+					        }
+					    }
+					}</pre>
+				<p>调度系统整合了Spring，可以通过@Autowired注解来引入数据Dao层：</p>
+				<pre class="layui-code">@Autowired
+				public BaseBusinessDao baseDao;</pre>
+				<p>考虑到调度通常都需要和数据库交互，BaseJob自带了BaseBusinessDao</p>
+				<p>@DJob用来设置调度cron时间、延迟时间等，注解参数详细介绍：</p>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>参数名称</th>
+							<th>参数类型</th>
+							<th>默认值</th>
+							<th>参数说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>isDynamic</td>
+							<td>boolean</td>
+							<td>true</td>
+							<td>调度任务是否允许在后台编辑cron时间、延迟时间等，默认允许编辑</td>
+						</tr>
+						<tr>
+							<td>cron</td>
+							<td>String</td>
+							<td>空</td>
+							<td>时间表达式，当isDynamic为true是可以为空，为空时需要在后台设置cron时间，然后才能开启</td>
+						</tr>
+						<tr>
+							<td>description</td>
+							<td>String</td>
+							<td>空</td>
+							<td>任务描述</td>
+						</tr>
+						<tr>
+							<td>initialDelay</td>
+							<td>int</td>
+							<td>0</td>
+							<td>延迟，单位为秒</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<p>调度系统通过@EnableQuartz类注解开启调度，同时也可以设置只开启某些调度，有2种设置方式。</p>
+				<p>1、通过@EnableQuartz的value属性声明需要开启哪些调度：</p>
+				<pre class="layui-code">@EnableQuartz(value = {HelloJob.class}) // 只开启HelloJob调度</pre>
+				<p>2、通过application.yml配置文件的jadmin.taskList属性声明需要开启哪些调度，此时需要将@EnableQuartz的ymlConfig属性设置为true</p>
+				<pre class="layui-code">#格式为包名.类名，如果在com.jadmin.quartz包下，可只写类名（注意大小写）
+				taskList: #List
+				  - HelloJob</pre>
+			</div>
+
+		</div>
+		
+		<script>
+			layui.use('code', function(){ //加载code模块
+			  layui.code(); //引用code方法
+			});
+		</script>
+	</body>
+</html>

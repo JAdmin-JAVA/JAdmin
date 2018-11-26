@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../css/global-v1.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/layer/default/layer.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/code.css" media="all">
+		<script src="../layui/layui.all.js" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="site-content">
+			<h1 class="site-h1">下拉框</h1>
+			
+			<blockquote class="site-tips site-text">
+				下拉框默认使用了Select-or-Die插件进行美化，Select-or-Die 就是一款基于 jQuery 的下拉框美化插件，
+				你不用修改你原来的下拉框，它能够完全无缝的对你原来的下拉框进行美化，
+				它甚至还支持添加前缀、HTML data 属性、键盘循环控制、设置高度、跳转到链接以及回调函数等等。
+				除了默认的样式外，Select-or-Die 还另外提供了 3 套皮肤，相信有了 Select-or-Die，你的设计会更加统一、美观。
+			</blockquote>
+			
+			<div class="site-text">
+				<p>Select-or-Die需要引用以下文件：</p>
+				<pre class="layui-code"><link href="/lib/Select-or-Die-master/selectordie.css" rel="stylesheet" type="text/css" />
+				<script type="text/javascript" src="/lib/Select-or-Die-master/selectordie.js"></script></pre>
+				<p>使用时不需要修改原始select组件的html代码，只需添加js代码：</p>
+				<pre class="layui-code">$(function(){
+				    $("select:not('.defalut')").selectOrDie();
+				});</pre>
+				<p>插件美化后的效果，如下图所示：</p>
+				<img src="../images/ft-4.png" width="500px"/>
+				<p>Select-or-Die支持以下配置：</p>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>属性/方法</th>
+							<th>类型</th>
+							<th>默认值</th>
+							<th>说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>customID</td>
+							<td>字符串</td>
+							<td>空</td>
+							<td>绑定 id</td>
+						</tr>
+						<tr>
+							<td>customClass</td>
+							<td>字符串</td>
+							<td>空</td>
+							<td>绑定 class</td>
+						</tr>
+						<tr>
+							<td>placeholder</td>
+							<td>字符串</td>
+							<td>空</td>
+							<td>占位符，同 HTML5 placeholder 属性</td>
+						</tr>
+						<tr>
+							<td>prefix</td>
+							<td>字符串</td>
+							<td>空</td>
+							<td>添加前缀</td>
+						</tr>
+						<tr>
+							<td>cycle</td>
+							<td>布尔值</td>
+							<td>false</td>
+							<td>键盘控制是否循环</td>
+						</tr>
+						<tr>
+							<td>links</td>
+							<td>布尔值</td>
+							<td>false</td>
+							<td>跳转到链接</td>
+						</tr>
+						<tr>
+							<td>linksExternal</td>
+							<td>布尔值</td>
+							<td>false</td>
+							<td>跳转到外部链接</td>
+						</tr>
+						<tr>
+							<td>size</td>
+							<td>整数</td>
+							<td>0</td>
+							<td>设置高度（个数），如果你有一个很长的下拉</td>
+						</tr>
+						<tr>
+							<td>tabIndex</td>
+							<td>整数</td>
+							<td>0</td>
+							<td>设置 tabindex</td>
+						</tr>
+						<tr>
+							<td>onChange</td>
+							<td>函数</td>
+							<td>空</td>
+							<td>下拉框改变之后的回调函数</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+		
+		<script>
+			layui.use('code', function(){ //加载code模块
+			  layui.code({
+				  encode: true //是否转义html标签。默认不开启
+			  });
+			});
+		</script>
+	</body>
+</html>

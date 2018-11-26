@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+	<jmxConfigurator />
+
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%date [%thread] %-5level %logger{80} - %msg%n</pattern>
+		</layout>
+	</appender>
+
+	<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">  
+		<file>D:/logs/JAdmin.log</file>  
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+			<fileNamePattern>D:/logs/JAdmin.%d{yyyy-MM-dd}.log.zip</fileNamePattern>  
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">  
+			<pattern>%-20(%d{HH:mm:ss.SSS} [%thread]) %-5level %logger{80} - %msg%n</pattern>  
+		</layout>
+	</appender>
+
+	<logger name="com.jadmin">
+		<level value="INFO" />
+	</logger>
+
+	<logger name="org.springframework.jdbc" level="WARN" />
+
+    <logger name="com.mchange">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="org.springframework">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="org.hibernate">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="org.hibernate.SQL">
+		<level value="INFO" />
+	</logger>
+
+    <logger name="org.hibernate.cache">
+		<level value="ERROR" />
+	</logger>
+
+    <logger name="org.quartz">
+		<level value="INFO" />
+	</logger>
+
+    <logger name="com.zaxxer.hikari">
+		<level value="INFO" />
+	</logger>
+
+    <logger name="ch.qos">
+		<level value="WARN" />
+	</logger>
+	
+	<root>
+		<level value="debug" />
+		<appender-ref ref="stdout" />
+		<appender-ref ref="file" />
+	</root>
+</configuration>

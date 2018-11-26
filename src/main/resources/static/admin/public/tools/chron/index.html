@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>秒表计时器</title>
+		<style>
+			body{margin:0;padding:0;}
+			.box{margin:10px auto;width:400px;}
+			#showtime{margin:20px;margin-bottom: 20px;text-align: center;}
+			span{font-size: 60px;}
+			button{width:100px;height:100px;border-radius: 50px;border:0;outline:none ;margin:0 48px;font-size:24px;}
+			#record{margin-top:20px;}
+			#record div{width:400px;height:30px;border-bottom:1px dotted #666;}
+			#record span{font-size:20px;}
+			.left{float:left;}
+			.right{float:right;}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div id="showtime">
+				<span>00</span>
+				<span>:</span>
+				<span>00</span>
+				<span>:</span>
+				<span>00</span>
+			</div>
+			<div class="bnt">
+				<button>记次</button>
+				<button>启动</button>
+			</div>
+			<!--记录显示的次数-->
+			<div id="record">
+				<!--/*<div>
+					<span class="left">第一次记录:</span>
+					<span class="right">00:00:00</span>
+				</div>*/-->
+			</div>
+		</div>
+		<script src="jquery-1.12.4.min.js"></script>
+		<script>
+		//添加事件
+		$(function(){
+				var min=0;
+				var sec=0;
+				var ms=0;
+				var timer=null;
+				var count=0;
+		//点击第一个按钮
+			$('.bnt button:eq(0)').click(function(){
+				if($(this).html()=='记次'){
+					if(!timer){
+						alert("没有开启定时器!");
+						return;
+					}
+						count++;
+						var right1="<span class='right'>"+$('#showtime').text()+"</span>";
+						 var insertStr = "<div><span class='left'>记次"+count+"</span>" +right1+"</div>";
+						 
+						$("#record").prepend($(insertStr));
+					
+				}else{
+					min=0;
+					sec=0;
+					ms=0;
+					count=0;
+					$('#showtime span:eq(0)').html('00');
+					$('#showtime span:eq(2)').html('00');
+					$('#showtime span:eq(4)').html('00');
+					$('#record').html('');
+					}
+				
+			});
+		//点击第二个按钮
+			$('.bnt button:eq(1)').click(function(){
+				if($(this).html()=='启动'){
+					$(this).html('停止');
+					$('.bnt button:eq(0)').html('记次');
+					clearInterval(timer);
+					timer=setInterval(show,10)
+				}else{
+					$(this).html('启动');
+					$('.bnt button:eq(0)').html('复位');
+					clearInterval(timer);
+				}
+			});
+		//生成时间
+			function show(){
+				ms++;
+				if(sec==60){
+					min++;sec=0;
+				}
+				if(ms==100){
+					sec++;ms=0;
+				}
+				var msStr=ms;
+				if(ms<10){
+					msStr="0"+ms;
+				}
+				var secStr=sec;
+				if(sec<10){
+					secStr="0"+sec;
+				}
+				var minStr=min;
+				if(min<10){
+					minStr="0"+min;
+				}
+				$('#showtime span:eq(0)').html(minStr);
+				$('#showtime span:eq(2)').html(secStr);
+				$('#showtime span:eq(4)').html(msStr);
+			}
+		})
+		</script>
+
+	</body>
+</html>

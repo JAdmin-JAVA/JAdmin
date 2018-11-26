@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../css/global-v1.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/layer/default/layer.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/code.css" media="all">
+		<script src="../layui/layui.all.js" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="site-content">
+			<h1 class="site-h1">常见问题</h1>
+			
+			<blockquote class="site-tips site-text">
+				本篇将主要讲解使用过程中普遍遇到的“问题”，这些问题并非是BUG，通常是需要我们自己去注意的一些点。（会结合用户反馈持续补充）
+			</blockquote>
+			
+			<div class="site-text">
+				<fieldset class="layui-elem-field layui-field-title site-title">
+					<legend>
+						<a name="classical">1、后台模板用的哪款？为何不用layui？</a>
+					</legend>
+				</fieldset>
+				<p>layuiAdmin是 layui 出品的一款非常优秀的后台模板，但是需要授权使用，为了不必要的纠纷，JAdmin默认使用了同样优秀的H-ui.admin作为后台模板。
+					JAdmin本身是开源系统，您可以随意修改后台模板。</p>
+			</div>
+			
+			<div class="site-text">
+				<fieldset class="layui-elem-field layui-field-title site-title">
+					<legend>
+						<a name="classical">2、不登录就能访问后台任意页面？</a>
+					</legend>
+				</fieldset>
+				<p>为方便开发，当项目为调试模式时，访问后台页面后，自动用admin用户登录。将application.yml中的debug修改为false，关闭该功能。
+					项目正常上线时，请务必关闭调试模式。</p>
+				<pre class="layui-code">#是否开启调试模式
+				debug: true</pre>
+			</div>
+			
+			<div class="site-text">
+				<fieldset class="layui-elem-field layui-field-title site-title">
+					<legend>
+						<a name="classical">3、一修改代码，系统就自动重启？</a>
+					</legend>
+				</fieldset>
+				<p>系统默认开启了热部署，可以将pom.xml的以下配置注释掉，就可以关闭热部署。</p>
+				<pre class="layui-code"><!-- 热部署 -->
+				<dependency> 
+				    <groupId>org.springframework.boot</groupId> 
+				    <artifactId>spring-boot-devtools</artifactId> 
+				    <scope>runtime</scope>
+				</dependency></pre>
+			</div>
+			
+			<div class="site-text">
+				<fieldset class="layui-elem-field layui-field-title site-title">
+					<legend>
+						<a name="classical">4、Spring Boot已经默认Themeleaf，Vue.js也发展迅速，JAdmin为何还用陈旧的JSP？</a>
+					</legend>
+				</fieldset>
+				<p>哈哈哈哈，下个问题。</p>
+			</div>
+			
+			<div class="site-text">
+				<fieldset class="layui-elem-field layui-field-title site-title">
+					<legend>
+						<a name="classical">5、寻求更多帮助</a>
+					</legend>
+				</fieldset>
+				<p>建议大家多看文档，仔细阅读文档，后面只会节省更多时间！有能力的话建议大家多看源码，源码注释写的很详细，能让你更清楚的理解框架。</p>
+			</div>
+		</div>
+		
+		<script>
+			layui.use('code', function(){ //加载code模块
+			  layui.code({
+				  encode: true //是否转义html标签。默认不开启
+			  });
+			});
+		</script>
+	</body>
+</html>

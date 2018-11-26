@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../css/global-v1.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/layer/default/layer.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/code.css" media="all">
+		<script src="../layui/layui.all.js" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div class="site-content">
+			<h1 class="site-h1">表结构文档</h1>
+
+			<div class="site-text">
+				<p>JAdmin需要11张基础表支撑</p>
+				<fieldset class="layui-elem-field layui-field-title site-title">
+					<legend>
+						<a name="classical">sys_config 系统配置表</a>
+					</legend>
+				</fieldset>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>字段名称</th>
+							<th>字段类型</th>
+							<th>相关属性</th>
+							<th>字段说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>configId</td>
+							<td>varchar(32)</td>
+							<td>PRIMARY KEY</td>
+							<td>主键</td>
+						</tr>
+						<tr>
+							<td>name</td>
+							<td>varchar(128)</td>
+							<td>NOT NULL</td>
+							<td>名字</td>
+						</tr>
+						<tr>
+							<td>code</td>
+							<td>varchar(128)</td>
+							<td>NOT NULL</td>
+							<td>编号</td>
+						</tr>
+						<tr>
+							<td>coValue</td>
+							<td>text</td>
+							<td>NOT NULL</td>
+							<td>值</td>
+						</tr>
+						<tr>
+							<td>isOpen</td>
+							<td>varchar(128)</td>
+							<td>NOT NULL</td>
+							<td>是否允许在界面中编辑 1-是，0-否</td>
+						</tr>
+						<tr>
+							<td>operateTime</td>
+							<td>varchar(19)</td>
+							<td>NOT NULL</td>
+							<td>操作时间</td>
+						</tr>
+						<tr>
+							<td>operatorId</td>
+							<td>varchar(32)</td>
+							<td>NOT NULL</td>
+							<td>操作人</td>
+						</tr>
+						<tr>
+							<td>billStatus</td>
+							<td>char(1)</td>
+							<td>NOT NULL</td>
+							<td>状态 1正常 0禁用</td>
+						</tr>
+						<tr>
+							<td>memo</td>
+							<td>varchar(512)</td>
+							<td>NULL</td>
+							<td>描述</td>
+						</tr>
+					</tbody>
+				</table>
+				<fieldset class="layui-elem-field layui-field-title site-title">
+					<legend>
+						<a name="classical">sys_dictkind 字典种类表</a>
+					</legend>
+				</fieldset>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>字段名称</th>
+							<th>字段类型</th>
+							<th>相关属性</th>
+							<th>字段说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>dictkindId</td>
+							<td>varchar(32)</td>
+							<td>PRIMARY KEY</td>
+							<td>主键</td>
+						</tr>
+						<tr>
+							<td>code</td>
+							<td>varchar(128)</td>
+							<td>NOT NULL</td>
+							<td>字典种类编号</td>
+						</tr>
+						<tr>
+							<td>name</td>
+							<td>varchar(1024)</td>
+							<td>NOT NULL</td>
+							<td>字典种类名称</td>
+						</tr>
+						<tr>
+							<td>isDynamic</td>
+							<td>char(1)</td>
+							<td>NOT NULL</td>
+							<td>是否是动态的，动态查询数据库的为1，否则0</td>
+						</tr>
+						<tr>
+							<td>dynSql</td>
+							<td>varchar(1024)</td>
+							<td>NULL</td>
+							<td>如果字典的属性值不是固定的，就查询sql</td>
+						</tr>
+						<tr>
+							<td>type</td>
+							<td>char(1)</td>
+							<td>NOT NULL</td>
+							<td>字典类别类型，多选还是单选，详见数据字典</td>
+						</tr>
+						<tr>
+							<td>isOpen</td>
+							<td>char(1)</td>
+							<td>NOT NULL</td>
+							<td>是否允许在界面中编辑 1-是，0-否</td>
+						</tr>
+						<tr>
+							<td>operateTime</td>
+							<td>varchar(19)</td>
+							<td>NULL</td>
+							<td>操作时间</td>
+						</tr>
+						<tr>
+							<td>billStatus</td>
+							<td>char(1)</td>
+							<td>NOT NULL</td>
+							<td>状态 1正常 0禁用</td>
+						</tr>
+						<tr>
+							<td>memo</td>
+							<td>varchar(512)</td>
+							<td>NULL</td>
+							<td>描述</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<fieldset class="layui-elem-field layui-field-title site-title">
+					<legend>
+						<a name="classical">sys_dictinfo 字典属性表</a>
+					</legend>
+				</fieldset>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>字段名称</th>
+							<th>字段类型</th>
+							<th>相关属性</th>
+							<th>字段说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>dictinfoId</td>
+							<td>varchar(32)</td>
+							<td>PRIMARY KEY</td>
+							<td>主键</td>
+						</tr>
+						<tr>
+							<td>dictkindId</td>
+							<td>varchar(32)</td>
+							<td>NULL</td>
+							<td>字典父ID</td>
+						</tr>
+						<tr>
+							<td>dictinfoFid</td>
+							<td>varchar(32)</td>
+							<td>NULL</td>
+							<td>如果是2级以上的，需要fid</td>
+						</tr>
+						<tr>
+							<td>name</td>
+							<td>varchar(1024)</td>
+							<td>NOT NULL</td>
+							<td>字典名字</td>
+						</tr>
+						<tr>
+							<td>code</td>
+							<td>varchar(128)</td>
+							<td>NULL</td>
+							<td>字典编号</td>
+						</tr>
+						<tr>
+							<td>sort</td>
+							<td>int(10)</td>
+							<td>NOT NULL</td>
+							<td>排序，小的在前面</td>
+						</tr>
+						<tr>
+							<td>level</td>
+							<td>char(1)</td>
+							<td>NOT NULL</td>
+							<td>级别，默认1级</td>
+						</tr>
+						<tr>
+							<td>billStatus</td>
+							<td>char(1)</td>
+							<td>NOT NULL</td>
+							<td>状态 1正常 0禁用</td>
+						</tr>
+						<tr>
+							<td>memo</td>
+							<td>varchar(512)</td>
+							<td>NULL</td>
+							<td>描述</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<fieldset class="layui-elem-field layui-field-title site-title">
+					<legend>
+						<a name="classical">sys_log 系统日志表</a>
+					</legend>
+				</fieldset>
+
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>字段名称</th>
+							<th>字段类型</th>
+							<th>相关属性</th>
+							<th>字段说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>logId</td>
+							<td>varchar(32)</td>
+							<td>PRIMARY KEY</td>
+							<td>主键</td>
+						</tr>
+						<tr>
+							<td>orgId</td>
+							<td>varchar(32)</td>
+							<td>NULL</td>
+							<td>机构ID</td>
+						</tr>
+						<tr>
+							<td>userId</td>
+							<td>varchar(32)</td>
+							<td>NULL</td>
+							<td>用户ID</td>
+						</tr>
+						<tr>
+							<td>url</td>
+							<td>varchar(1024)</td>
+							<td>NULL</td>
+							<td>请求的url</td>
+						</tr>
+						<tr>
+							<td>type</td>
+							<td>varchar(128)</td>
+							<td>NULL</td>
+							<td>类型</td>
+						</tr>
+						<tr>
+							<td>content</td>
+							<td>longtext</td>
+							<td>NOT NULL</td>
+							<td>日志内容</td>
+						</tr>
+						<tr>
+							<td>clientIp</td>
+							<td>varchar(64)</td>
+							<td>NULL</td>
+							<td>用户操作IP</td>
+						</tr>
+						<tr>
+							<td>level</td>
+							<td>char(1)</td>
+							<td>NULL</td>
+							<td>日志级别</td>
+						</tr>
+						<tr>
+							<td>operateTime</td>
+							<td>varchar(19)</td>
+							<td>NULL</td>
+							<td>操作时间</td>
+						</tr>
+						<tr>
+							<td>memo</td>
+							<td>varchar(512)</td>
+							<td>NULL</td>
+							<td>描述</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<fieldset class="layui-elem-field layui-field-title site-title">
+					<legend>
+						<a name="classical">sys_memorandum 备忘笺</a>
+					</legend>
+				</fieldset>
+
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>字段名称</th>
+							<th>字段类型</th>
+							<th>相关属性</th>
+							<th>字段说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>memorandumId</td>
+							<td>varchar(32)</td>
+							<td>PRIMARY KEY</td>
+							<td>主键</td>
+						</tr>
+						<tr>
+							<td>content</td>
+							<td>text</td>
+							<td>NULL</td>
+							<td>备忘签内容</td>
+						</tr>
+						<tr>
+							<td>isDelete</td>
+							<td>char(1)</td>
+							<td>NOT NULL</td>
+							<td>是否删除 1-是 0-否</td>
+						</tr>
+						<tr>
+							<td>operateTime</td>
+							<td>varchar(19)</td>
+							<td>NOT NULL</td>
+							<td>操作时间</td>
+						</tr>
+						<tr>
+							<td>operatorId</td>
+							<td>varchar(32)</td>
+							<td>NOT NULL</td>
+							<td>操作人</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<fieldset class="layui-elem-field layui-field-title site-title">
+					<legend>
+						<a name="classical">sys_org 部门表</a>
+					</legend>
+				</fieldset>
+
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>字段名称</th>
+							<th>字段类型</th>
+							<th>相关属性</th>
+							<th>字段说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>orgId</td>
+							<td>varchar(32)</td>
+							<td>PRIMARY KEY</td>
+							<td>主键</td>
+						</tr>
+						<tr>
+							<td>code</td>
+							<td>varchar(128)</td>
+							<td>NOT NULL</td>
+							<td>字典种类编号</td>
+						</tr>
+						<tr>
+							<td>name</td>
+							<td>varchar(1024)</td>
+							<td>NOT NULL</td>
+							<td>字典种类名称</td>
+						</tr>
+						<tr>
+							<td>fullname</td>
+							<td>varchar(1024)</td>
+							<td>NULL</td>
+							<td>全称</td>
+						</tr>
+						<tr>
+							<td>seq</td>
+							<td>varchar(1024)</td>
+							<td>NOT NULL</td>
+							<td>序列号</td>
+						</tr>
+						<tr>
+							<td>orgFSeq</td>
+							<td>varchar(1024)</td>
+							<td>NOt NULL</td>
+							<td>所属父seq</td>
+						</tr>
+						<tr>
+							<td>isDelete</td>
+							<td>char(1)</td>
+							<td>NOT NULL</td>
+							<td>是否删除</td>
+						</tr>
+						<tr>
+							<td>operateTime</td>
+							<td>varchar(19)</td>
+							<td>NOT NULL</td>
+							<td>操作时间</td>
+						</tr>
+						<tr>
+							<td>operatorId</td>
+							<td>varchar(32)</td>
+							<td>NOT NULL</td>
+							<td>操作人</td>
+						</tr>
+						<tr>
+							<td>billStatus</td>
+							<td>char(1)</td>
+							<td>NOT NULL</td>
+							<td>状态 1正常 0禁用</td>
+						</tr>
+						<tr>
+							<td>memo</td>
+							<td>varchar(512)</td>
+							<td>NULL</td>
+							<td>描述</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<fieldset class="layui-elem-field layui-field-title site-title">
+					<legend>
+						<a name="classical">sys_user 系统用户表</a>
+					</legend>
+				</fieldset>
+
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>字段名称</th>
+							<th>字段类型</th>
+							<th>相关属性</th>
+							<th>字段说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>userId</td>
+							<td>varchar(32)</td>
+							<td>PRIMARY KEY</td>
+							<td>主键</td>
+						</tr>
+						<tr>
+							<td>orgId</td>
+							<td>varchar(32)</td>
+							<td>NULL</td>
+							<td>所属机构/部门</td>
+						</tr>
+						<tr>
+							<td>roleId</td>
+							<td>varchar(32)</td>
+							<td>NOT NULL</td>
+							<td>所属角色</td>
+						</tr>
+						<tr>
+							<td>account</td>
+							<td>varchar(128)</td>
+							<td>NOT NULL</td>
+							<td>账号</td>
+						</tr>
+						<tr>
+							<td>name</td>
+							<td>varchar(128)</td>
+							<td>NOT NULL</td>
+							<td>名字</td>
+						</tr>
+						<tr>
+							<td>password</td>
+							<td>varchar(128)</td>
+							<td>NOT NULL</td>
+							<td>密码</td>
+						</tr>
+						<tr>
+							<td>sex</td>
+							<td>char(1)</td>
+							<td>NULL</td>
+							<td>性别，详见数据词典</td>
+						</tr>
+						<tr>
+							<td>lastLoginIp</td>
+							<td>varchar(32)</td>
+							<td>NULL</td>
+							<td>上次登录ip</td>
+						</tr>
+						<tr>
+							<td>lastLoginTime</td>
+							<td>varchar(19)</td>
+							<td>NULL</td>
+							<td>上次登录时间</td>
+						</tr>
+						<tr>
+							<td>loginCount</td>
+							<td>int(10)</td>
+							<td>NOT NULL</td>
+							<td>登录次数</td>
+						</tr>
+						<tr>
+							<td>psChangeTime</td>
+							<td>varchar(19)</td>
+							<td>NULL</td>
+							<td>密码修改时间</td>
+						</tr>
+						<tr>
+							<td>isDelete</td>
+							<td>char(1)</td>
+							<td>NOT NULL</td>
+							<td>是否删除</td>
+						</tr>
+						<tr>
+							<td>operateTime</td>
+							<td>varchar(19)</td>
+							<td>NOT NULL</td>
+							<td>操作时间</td>
+						</tr>
+						<tr>
+							<td>operatorId</td>
+							<td>varchar(32)</td>
+							<td>NOT NULL</td>
+							<td>操作人</td>
+						</tr>
+						<tr>
+							<td>billStatus</td>
+							<td>char(1)</td>
+							<td>NOT NULL</td>
+							<td>状态 1正常 0禁用</td>
+						</tr>
+						<tr>
+							<td>memo</td>
+							<td>varchar(512)</td>
+							<td>NULL</td>
+							<td>描述</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<fieldset class="layui-elem-field layui-field-title site-title">
+					<legend>
+						<a name="classical">sys_role 角色表</a>
+					</legend>
+				</fieldset>
+
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>字段名称</th>
+							<th>字段类型</th>
+							<th>相关属性</th>
+							<th>字段说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>roleId</td>
+							<td>varchar(32)</td>
+							<td>PRIMARY KEY</td>
+							<td>主键</td>
+						</tr>
+						<tr>
+							<td>roleName</td>
+							<td>varchar(128)</td>
+							<td>NOT NULL</td>
+							<td>角色名称</td>
+						</tr>
+						<tr>
+							<td>roleType</td>
+							<td>char(1)</td>
+							<td>NOT NULL</td>
+							<td>1全局型角色、2应用级角色</td>
+						</tr>
+						<tr>
+							<td>operateTime</td>
+							<td>varchar(19)</td>
+							<td>NOT NULL</td>
+							<td>操作时间</td>
+						</tr>
+						<tr>
+							<td>operatorId</td>
+							<td>varchar(32)</td>
+							<td>NOT NULL</td>
+							<td>操作人</td>
+						</tr>
+						<tr>
+							<td>billStatus</td>
+							<td>char(1)</td>
+							<td>NOT NULL</td>
+							<td>状态 1正常 0禁用</td>
+						</tr>
+						<tr>
+							<td>memo</td>
+							<td>varchar(512)</td>
+							<td>NULL</td>
+							<td>描述</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<fieldset class="layui-elem-field layui-field-title site-title">
+					<legend>
+						<a name="classical">sys_role_module 角色权限表</a>
+					</legend>
+				</fieldset>
+
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>字段名称</th>
+							<th>字段类型</th>
+							<th>相关属性</th>
+							<th>字段说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>roleModuleId</td>
+							<td>varchar(32)</td>
+							<td>PRIMARY KEY</td>
+							<td>主键</td>
+						</tr>
+						<tr>
+							<td>roleId</td>
+							<td>varchar(128)</td>
+							<td>NOT NULL</td>
+							<td>角色名称</td>
+						</tr>
+						<tr>
+							<td>roleType</td>
+							<td>char(1)</td>
+							<td>NOT NULL</td>
+							<td>1全局型角色、2应用级角色</td>
+						</tr>
+						<tr>
+							<td>operateTime</td>
+							<td>varchar(19)</td>
+							<td>NOT NULL</td>
+							<td>操作时间</td>
+						</tr>
+						<tr>
+							<td>operatorId</td>
+							<td>varchar(32)</td>
+							<td>NOT NULL</td>
+							<td>操作人</td>
+						</tr>
+						<tr>
+							<td>billStatus</td>
+							<td>char(1)</td>
+							<td>NOT NULL</td>
+							<td>状态 1正常 0禁用</td>
+						</tr>
+						<tr>
+							<td>memo</td>
+							<td>varchar(512)</td>
+							<td>NULL</td>
+							<td>描述</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<fieldset class="layui-elem-field layui-field-title site-title">
+					<legend>
+						<a name="classical">sys_task 系统调度任务表</a>
+					</legend>
+				</fieldset>
+
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>字段名称</th>
+							<th>字段类型</th>
+							<th>相关属性</th>
+							<th>字段说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>taskId</td>
+							<td>varchar(32)</td>
+							<td>PRIMARY KEY</td>
+							<td>主键</td>
+						</tr>
+						
+						<tr>
+							<td>className</td>
+							<td>varchar(256)</td>
+							<td>NOT NULL</td>
+							<td>包名+类名</td>
+						</tr>
+						<tr>
+							<td>cron</td>
+							<td>varchar(256)</td>
+							<td>NULL</td>
+							<td>cron表达式</td>
+						</tr>
+						<tr>
+							<td>initialDelay</td>
+							<td>int(32)</td>
+							<td>NULL</td>
+							<td>延迟执行 单位秒</td>
+						</tr>
+						<tr>
+							<td>description</td>
+							<td>varchar(256)</td>
+							<td>NULL</td>
+							<td>描述</td>
+						</tr>
+						<tr>
+							<td>serverIp</td>
+							<td>varchar(32)</td>
+							<td>NULL</td>
+							<td>服务器ip</td>
+						</tr>
+						<tr>
+							<td>billStatus</td>
+							<td>char(1)</td>
+							<td>NULL</td>
+							<td>调度开关，详见数据词典</td>
+						</tr>
+						<tr>
+							<td>isDynamic</td>
+							<td>char(1)</td>
+							<td>NULL</td>
+							<td>是否可修改 1-是 0-否</td>
+						</tr>
+						<tr>
+							<td>isEdited</td>
+							<td>char(1)</td>
+							<td>NULL</td>
+							<td>是否已经在界面中编辑过</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<fieldset class="layui-elem-field layui-field-title site-title">
+					<legend>
+						<a name="classical">sys_task_log 调度任务执行记录表</a>
+					</legend>
+				</fieldset>
+
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>字段名称</th>
+							<th>字段类型</th>
+							<th>相关属性</th>
+							<th>字段说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>logId</td>
+							<td>varchar(32)</td>
+							<td>PRIMARY KEY</td>
+							<td>主键</td>
+						</tr>
+						
+						<tr>
+							<td>className</td>
+							<td>varchar(256)</td>
+							<td>NOT NULL</td>
+							<td>包名+类名</td>
+						</tr>
+						<tr>
+							<td>serverIp</td>
+							<td>varchar(32)</td>
+							<td>NOT NULL</td>
+							<td>服务器ip</td>
+						</tr>
+						<tr>
+							<td>content</td>
+							<td>varchar(2048)</td>
+							<td>NOT NULL</td>
+							<td>内容</td>
+						</tr>
+						<tr>
+							<td>startTime</td>
+							<td>varchar(19)</td>
+							<td>NOT NULL</td>
+							<td>开始时间</td>
+						</tr>
+						<tr>
+							<td>endTime</td>
+							<td>varchar(19)</td>
+							<td>NOT NULL</td>
+							<td>结束时间</td>
+						</tr>
+						<tr>
+							<td>executeTime</td>
+							<td>int(11)</td>
+							<td>NOT NULL</td>
+							<td>耗时 单位为秒</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+
+		</div>
+
+		<script>
+			layui.use('code', function() { //加载code模块
+				layui.code(); //引用code方法
+			});
+		</script>
+	</body>
+
+</html>

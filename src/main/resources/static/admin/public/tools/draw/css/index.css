@@ -1,0 +1,206 @@
+@font-face {
+    font-family: 'iconfont';
+    src: url('t/font_616746_akwhdkxqajrlik9.eot');
+    src: url('t/font_616746_akwhdkxqajrlik9.eot?#iefix') format('embedded-opentype'),
+    url('t/font_616746_akwhdkxqajrlik9.woff') format('woff'),
+    url('t/font_616746_akwhdkxqajrlik9.ttf') format('truetype'),
+    url('t/font_616746_akwhdkxqajrlik9.svg#iconfont') format('svg');
+}
+.iconfont{
+	font-family:"iconfont";
+	font-size: 26px;
+	font-style:normal;
+	color: #fff;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+body,ul,ol,dl,h1,h2,h3,h4,h5,h6,p,input{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+img,input{
+    border: none;
+}
+a{
+    text-decoration: none;
+}
+*{
+    box-sizing:border-box;
+}
+body{
+	font-family:"Helvetica Neue LT Rro","微软雅黑";
+    font-size: 12px;
+    color: #333;
+    background: #3653dd;
+}
+.h_box{
+	width: 1200px;
+	height: 600px;
+	border-radius: 30px;
+	overflow: hidden;
+	position: fixed;
+	top: calc(45% - 300px);
+	left: 50%;
+	margin-left: -600px;
+}
+#canvas{
+    background: #7df6e3;
+    display: block;
+    cursor: pointer;
+}
+.h_console{
+    width: 183px;
+    height: 600px;
+    background: #07133d;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.h_tool{
+    width: 123px;
+    height: 50px;
+    background: #3652d7;
+    border-radius: 8px;
+    margin: 22px auto 0;
+    text-align: center;
+    line-height: 50px;
+    color: #fff;
+    font-size: 24px;
+}
+.h_tool1{
+    width: 143px;
+    height: 294px;
+    background: #7bffe8;
+    margin: 20px auto;
+    border-radius: 12px;
+}
+.h_tool2{
+    height: 150px;
+}
+.h_tool1 li{
+    width: 37px;
+    height: 37px;
+    background: #355fcf;
+    margin: 20px 5px 0;
+    border-radius: 8px;
+    float: left;
+    line-height: 37px;
+    text-align: center;
+}
+.h_tool1 li>span{
+	cursor: pointer;
+}
+.h_tittle{
+    border-top: 166px solid #07133d;
+    border-left: 170px solid transparent;
+    border-right: 157px solid transparent;
+    border-bottom: 139px solid transparent;
+    transform: rotate(225deg);
+    position: absolute;
+    top: -145px;
+    right: -219px;
+}
+.h_tittle1>img{
+    width: 44px;
+    margin-top: 8px;
+    margin-left: 104px;
+    transform: rotate(272deg);
+}
+.h_tittle1{
+    width: 274px;
+    height: 110px;
+    overflow: hidden;
+    transform: rotate(180deg);
+    position: absolute;
+    top: -167px;
+    right: -163px;
+}
+.h_tool1 .bgtb{
+	background: rgb(147, 255, 47);
+}
+.h_tool1 .bgtb a{
+	color: #07133d;
+}
+.bgp{
+	position: relative;
+}
+.polygon1{
+    width: 41px;
+    height: 23px;
+    visibility: hidden;
+    position: absolute;
+    transition: all 0.6s;
+    top: calc(50% - 14px);
+    right: -68px;
+}
+.bgp:hover .polygon1 {
+    visibility: visible;
+    transform: translateX(-27px);
+}
+.polygon1 input{
+    width: 40px;
+    height: 100%;
+    background: #494949;
+    color: #fff;
+    padding: 1px 1px 0 5px;
+    font-weight: bold;
+    border: 0;
+    outline: none;
+    position: absolute;
+    top: 2px;
+    right: 1px;
+}
+.trag{
+    width: 0;
+    height: 0;
+    border-top: 6px solid #494949;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    transform: rotate(90deg);
+    position: absolute;
+    top: 8.5px;
+    left: -12px;
+}
+.polygon2{
+    width: 126px;
+    height: 26px;
+    background: #494949;
+    visibility: hidden;
+    position: absolute;
+    transition: all 0.6s;
+    top: calc(50% - 12px);
+    right: -152px;
+}
+.poly1{
+	z-index: 999;
+}
+.bgp:hover .polygon2 {
+    visibility: visible;
+    transform: translateX(-27px);
+}
+.polygon2 input{
+    width: 100px;
+    background: #494949;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    top: 2.5px;
+    left: 4px;
+}
+.trag1{
+	top: 8px;
+}
+#numW{
+	height: 100%;
+	color: #fff;
+	line-height: 26px;
+	font-size: 14px;
+	position: absolute;
+	top: 0;
+	right: 4px;
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../css/global-v1.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/layer/default/layer.css" media="all">
+		<link rel="stylesheet" href="../layui/css/modules/code.css" media="all">
+		<script src="../layui/layui.all.js" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="site-content">
+			<h1 class="site-h1">树插件</h1>
+			
+			<blockquote class="site-tips site-text">
+				树插件默认使用的是zTree（<a target="_blank" href="http://www.treejs.cn/v3/api.php">点击查看官网API</a>），
+				zTree 是一个依靠 jQuery 实现的多功能 “树插件”。优异的性能、灵活的配置、多种功能的组合是 zTree 最大优点。</br>
+				 · zTree v3.0 将核心代码按照功能进行了分割，不需要的代码可以不用加载</br>
+				 · 采用了 延迟加载 技术，上万节点轻松加载，即使在 IE6 下也能基本做到秒杀</br>
+				 · 兼容 IE、FireFox、Chrome、Opera、Safari 等浏览器</br>
+				 · 支持 JSON 数据</br>
+				 · 支持静态 和 Ajax 异步加载节点数据</br>
+				 · 支持任意更换皮肤 / 自定义图标（依靠css）</br>
+				 · 支持极其灵活的 checkbox 或 radio 选择功能</br>
+				 · 提供多种事件响应回调</br>
+				 · 灵活的编辑（增/删/改/查）功能，可随意拖拽节点，还可以多节点拖拽哟</br>
+				 · 在一个页面内可同时生成多个 Tree 实例</br>
+				 · 简单的参数配置实现 灵活多变的功能</br>
+			</blockquote>
+			
+			
+			<div class="site-text">
+				<p>zTree需要引用以下文件：</p>
+				<pre class="layui-code"><link rel="stylesheet" href="/lib/zTree/v3/css/metroStyle/metroStyle.css" type="text/css">
+				<script type="text/javascript" src="/lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
+				<script type="text/javascript" src="/lib/zTree/v3/js/jquery.ztree.exhide-3.5.min.js"></script></pre>
+				<p>在页面上建立tree模型：</p>
+				<pre class="layui-code"><ul id="treeDemo" class="ztree"></ul></pre>
+				<p>然后添加以下javascript脚本：</p>
+				<pre class="layui-code">$(document).ready(function () {
+				    $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+					}</pre>
+				<p>$.fn.zTree.init($("#treeDemo"<span>), setting, zNodes);</span>&nbsp; 
+					treeDemo就是你那个树的id,也就是放在页面当中的这个：(<span>&lt;</span><span>ul&nbsp;</span><span>id</span>
+					<span>="treeDemo"</span><span>&nbsp;class</span><span>="ztree"</span><span>&gt;&lt;/</span><span>ul</span>
+					<span>&gt;</span>)的id。setting是一个json对象，用来初始化zTree的配置，zNodes，树在初使化的时候加载了它，用来定义数据：</p>
+				<pre class="layui-code">var zNodes = [
+				   {
+				       name: "", //节点名称
+				       open: false,  //节点是否可以展开
+				       isParent:true //是否为文件夹
+				   }
+				];</pre>
+				<p>框架默认使用的是zTree的metro风格，如下图所示：</p>
+				<img src="../images/ft-2.png" />
+				<p>更多更详细的API 建议大家去官网阅读，这里就不再搬运了，
+					<a target="_blank" href="http://www.treejs.cn/v3/api.php">http://www.treejs.cn/v3/api.php</a></p>
+			</div>
+
+		</div>
+		
+		<script>
+			layui.use('code', function(){ //加载code模块
+			  layui.code({
+				  encode: true //是否转义html标签。默认不开启
+			  });
+			});
+		</script>
+	</body>
+</html>
