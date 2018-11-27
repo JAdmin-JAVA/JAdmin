@@ -28,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
  * @Description:quartz工具类
  * @Copyright:JAdmin (c) 2018年09月25日
  * 
- * @author:-zhangjiao
+ * @author:-jiujiya
  * @version:1.0 
  */
 @Slf4j
