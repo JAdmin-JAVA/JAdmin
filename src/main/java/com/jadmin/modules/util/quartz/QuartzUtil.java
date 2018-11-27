@@ -190,7 +190,7 @@ public class QuartzUtil {
 			sb.append("'").append(sysTaskVO.getPrimaryKey()).append("',");
 		}
 		sb.deleteCharAt(sb.length() - 1);
-		String sql = "DELETE FROM SYS_TASK WHERE CLASSNAME NOT IN (" + sb + ") AND SERVERIP = ? ";
+		String sql = "DELETE FROM sys_task WHERE className NOT IN (" + sb + ") AND serverIp = ? ";
 		systemDao.getJdbcTemplate().update(sql, new Object[] {SERVER_IP});
 	}
 
