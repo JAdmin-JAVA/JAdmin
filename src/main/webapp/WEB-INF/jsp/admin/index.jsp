@@ -20,7 +20,7 @@ UserVO userVO = (UserVO)session.getAttribute("CUR_USER");
 			<a class="logo navbar-logo f-l mr-10 hidden-xs" href="/admin"><html:configValue code="DEF_PROJECT_NAME"/></a>
 			<span class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span>
 			
-			<nav class="nav navbar-nav">
+			<nav class="nav navbar-nav menu_top">
 				<ul class="cl">
 					<c:forEach items="${menus}" var="menu" varStatus="statu">
 						<li class="dropDown dropDown_hover <c:if test="${statu.first}">current</c:if>">

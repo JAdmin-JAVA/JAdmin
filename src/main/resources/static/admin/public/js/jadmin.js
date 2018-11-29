@@ -1,7 +1,7 @@
 var validform= null;
 $(function(){
 	$(".Wdate").parent('.formControls').css('width', '180px');
-	$('.navbar-nav .dropDown .dropDown_A').click(function() {
+	$('.menu_top .dropDown .dropDown_A').click(function() {
 		$('.Hui-aside .menu_dropdown dl').hide();
 		$('.Hui-aside .menu_dropdown .msun_menu_' + $(this).attr('_id')).show();
 		$(this).parent().parent().find('li').removeClass('current');
